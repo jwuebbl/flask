@@ -13,9 +13,7 @@ mysql.init_app(app)
 @app.route('/', methods=('GET', 'POST'))
 def home():
    if request.method == "POST":
-      # Check if user is in DB
       uname = request.form.get("uname")
-
       conn = mysql.connect()
       cursor = conn.cursor()
       sql = "INSERT INTO users (uname, nickname) VALUES ('" + uname + "', 'test');"
@@ -23,22 +21,20 @@ def home():
          cursor.execute(sql)
          conn.commit()
       except pymysql.err.IntegrityError as e:
-         if "Duplicate entry" in e:
-            print(e)
-      # except:
-      #    print('poop')
+         print(e)
       conn.close()
-      
-      # If not create a new user
-      # If login
-      return redirect(url_for('poop'))
-   return render_template('index.html')
+      return redirect(url_for('main'))
+   else:
+      return render_template('signin.html')
 
-@app.route('/poop', methods=('GET', 'POST'))
-def poop():
-   return render_template('poop.html')
+@app.route('/main', methods=('GET', 'POST'))
+def main():
+   return render_template('main.html')
+
+@app.route('/roulette')
+def vmd_timestamp():
+   return render_template('roulette.html')
 
 
 if __name__ == '__main__':
-   
    app.run()

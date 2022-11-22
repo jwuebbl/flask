@@ -1,6 +1,8 @@
 # Experimental Flask App
 ## Author: Jeffrey Wuebbles
-
+## How to start the Virtual Enviroment:
+	.\venv\Scripts\activate
+	
 ## Useful Database Commands: 
 ### Creating the database:
 	CREATE DATABASE myapp;

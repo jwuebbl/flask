@@ -14,9 +14,11 @@ mysql.init_app(app)
 @app.route('/', methods=('GET', 'POST'))
 def home():
    if request.method == "POST": 
-      cursor = mysql.connect().cursor()
+      connection = mysql.connect()
+      cursor = connection.cursor()
       username = request.form.get("uname")
-      cursor.execute('SELECT * FROM accounts WHERE username = %s', username)
+      cursor.execute("SELECT * FROM accounts WHERE username = %s", username)
+      connection.commit()
       account = cursor.fetchone()
       if account:
          # Create session data, we can access this data in other routes
@@ -24,9 +26,11 @@ def home():
          session['id'] = account[0]
          session['username'] = account[1]
          # Redirect to home page
-         return redirect(url_for('main'))
+         return render_template('main.html')
       else:
-         return 'Account not found.'
+         cursor.execute("INSERT INTO accounts (id, username, password, email) VALUES (NULL, %s, %s, %s)", (username, 'tstst', 'tststs'))
+         connection.commit()
+         return render_template('signin.html', newaccount=username)
    if request.method == "GET": 
       return render_template('signin.html')
 
@@ -52,11 +56,6 @@ def roulette():
       return render_template('roulette.html')
    else:
       return redirect('/')      
-
-@app.route('/test_backend', methods=('GET', 'POST'))
-def test_backend():
-   print('You are running this script on the back end.')
-   return redirect('/')
 
 
 if __name__ == '__main__':

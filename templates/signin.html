@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-	<title>Jeff's asdfs Tracker</title>
+	<title>Jeff's Flask Experiment</title>
 	<link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='images/dscim.ico') }}">
 	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/signin.css') }}">
 </head>
@@ -12,13 +12,14 @@
 	<div id="loginDiv">
 	<!-- Turning autocomplete on allows the browser to complete values the user has used before. -->
 		<form action="/" method="post" autocomplete="on">
-			<label for="uname">User name:</label><br>
-			<input type="text" id="uname" name="uname" required>
+			<input type="text" id="uname" name="uname" placeholder="User Name" required>
 			<input type="submit" value="Sign in">
 		</form>
-
-		<form action="/test_backend" method="post" id="run_something_on_the_backend"><button type="submit">Click Me</button></form>
 	</div>
+
+	{% if newaccount %}
+	<p id="newAccountMessage">Account "{{ newaccount }}" created! <br> You may now sign in with it.</p>
+	{% endif %}
 	
 	<footer>
 		<p>Author: Jeffrey Wuebbles<br>

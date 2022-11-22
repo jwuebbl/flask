@@ -7,15 +7,17 @@
 </head>
 
 <body>
-	<h1> Welcome lads! Lets see who the best degenerate is. </h1>
+	<h1>Welcome!</h1>
 	
 	<div id="loginDiv">
 	<!-- Turning autocomplete on allows the browser to complete values the user has used before. -->
 		<form action="/" method="post" autocomplete="on">
 			<label for="uname">User name:</label><br>
 			<input type="text" id="uname" name="uname" required>
-			<input type="submit" value="Submit Form">
+			<input type="submit" value="Sign in">
 		</form>
+
+		<form action="/test_backend" method="post" id="run_something_on_the_backend"><button type="submit">Click Me</button></form>
 	</div>
 	
 	<footer>

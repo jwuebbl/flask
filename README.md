@@ -2,7 +2,7 @@
 ## Author: Jeffrey Wuebbles
 ## How to start the Virtual Enviroment:
 	.\venv\Scripts\activate
-	
+
 ## Useful Database Commands: 
 ### Creating the database:
 	CREATE DATABASE myapp;
@@ -35,3 +35,7 @@ Find the "MySQL80" service and start it. <br>
 Start Powershell as an administrator and run the following command. <br>
 
 	Start-Service -Name "MySQL80"
+
+## Useful HTML
+### HTML for a button that submits a request to the backend:
+	<form action="/url_to_submit_to" method="post" id="this_buttons_id"><button type="submit">button_text</button></form>

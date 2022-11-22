@@ -53,6 +53,11 @@ def roulette():
    else:
       return redirect('/')      
 
+@app.route('/test_backend', methods=('GET', 'POST'))
+def test_backend():
+   print('You are running this script on the back end.')
+   return redirect('/')
+
 
 if __name__ == '__main__':
    app.run()

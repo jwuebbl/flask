@@ -23,7 +23,7 @@
 #### Explicitly defining the primary key: 
 	INSERT INTO `accounts` (`id`, `username`, `password`, `email`) VALUES (1, 'a', 'a', 'a@a.com');
 #### Allowing the primary key to auto-generate:
-	INSERT INTO accounts VALUES (NULL, 'aa', 'a', 'a');
+	"INSERT INTO accounts (id, username, password, email) VALUES (NULL, %s, %s, %s)", (username, 'tstst', 'tststs')
 
 ## Starting MySQL Service
 ### Option 1, Services GUI: <br>

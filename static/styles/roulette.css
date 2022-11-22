@@ -1,0 +1,32 @@
+/* Author: Jeffrey Wuebbles */
+
+body {
+    background-color: gray;
+  }
+
+  .red_space {
+    color: white;
+    background-color: red;
+    border-color: white;
+    border-width: 1px;
+    border-style: solid;
+    text-align: center;
+  }
+
+  .blk_space {
+    color: white;
+    background-color: black;
+    border-color: white;
+    border-width: 1px;
+    border-style: solid;
+    text-align: center;
+  }
+
+  .green_space {
+    color: white;
+    background-color: green;
+    border-color: white;
+    border-width: 1px;
+    border-style: solid;
+    text-align: center;
+  }

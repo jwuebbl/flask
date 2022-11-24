@@ -1,50 +1,59 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-	<title>Jeff's asdfs Tracker</title>
+	<title>Roulette</title>
 	<link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='images/dscim.ico') }}">
 	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/roulette.css') }}">
+	<script>
+		function poop() {
+			console.log('test');
+		}
+	</script>
 </head>
 
+<!-- 3 rows
+	12 columns -->
 <div id="table">
-	<div class="green_space">0</div>
-	<div class="green_space">00</div>
-	<div class="red_space">1</div>
-	<div class="blk_space">2</div>
-	<div class="red_space">3</div>
-	<div class="blk_space">4</div>
-	<div class="red_space">5</div>
-	<div class="blk_space">6</div>
-	<div class="red_space">7</div>
-	<div class="blk_space">8</div>
-	<div class="red_space">9</div>
-	<div class="blk_space">10</div>
-	<div class="red_space">11</div>
-	<div class="blk_space">12</div>
-	<div class="red_space">13</div>
-	<div class="blk_space">14</div>
-	<div class="red_space">15</div>
-	<div class="blk_space">16</div>
-	<div class="red_space">17</div>
-	<div class="blk_space">18</div>
-	<div class="red_space">19</div>
-	<div class="blk_space">20</div>
-	<div class="red_space">21</div>
-	<div class="blk_space">22</div>
-	<div class="red_space">23</div>
-	<div class="blk_space">24</div>
-	<div class="red_space">25</div>
-	<div class="blk_space">26</div>
-	<div class="red_space">27</div>
-	<div class="blk_space">28</div>
-	<div class="red_space">29</div>
-	<div class="blk_space">30</div>
-	<div class="red_space">31</div>
-	<div class="blk_space">32</div>
-	<div class="red_space">33</div>
-	<div class="blk_space">34</div>
-	<div class="red_space">35</div>
-	<div class="blk_space">36</div>
+	<div class="space green_space col_1">0</div>
+	<div class="space green_space col_1">00</div>
+	<div class="space red_space col_2">1</div>
+	<div class="space blk_space col_2">2</div>
+	<div class="space red_space col_2">3</div>
+	<div class="space blk_space col_3">4</div>
+	<div class="space red_space col_3">5</div>
+	<div class="space blk_space col_3">6</div>
+	<div class="space red_space col_4">7</div>
+	<div class="space blk_space col_4">8</div>
+	<div class="space red_space col_4">9</div>
+	<div class="space blk_space col_5">10</div>
+	<div class="space red_space col_5">11</div>
+	<div class="space blk_space col_5">12</div>
+
+	<div class="space red_space col_6">13</div>
+	<div class="space blk_space col_6">14</div>
+	<div class="space red_space col_6">15</div>
+	<div class="space blk_space col_7">16</div>
+	<div class="space red_space col_7">17</div>
+	<div class="space blk_space col_7">18</div>
+	<div class="space red_space col_8">19</div>
+	<div class="space blk_space col_8">20</div>
+	<div class="space red_space col_8">21</div>
+	<div class="space blk_space col_9">22</div>
+	<div class="space red_space col_9">23</div>
+	<div class="space blk_space col_9">24</div>
+
+	<div class="space red_space col_10">25</div>
+	<div class="space blk_space col_10">26</div>
+	<div class="space red_space col_10">27</div>
+	<div class="space blk_space col_11">28</div>
+	<div class="space red_space col_11">29</div>
+	<div class="space blk_space col_11">30</div>
+	<div class="space red_space col_12">31</div>
+	<div class="space blk_space col_12">32</div>
+	<div class="space red_space col_12">33</div>
+	<div class="space blk_space col_13">34</div>
+	<div class="space red_space col_13">35</div>
+	<div class="space blk_space col_13">36</div>
 </div>
 
 <body>

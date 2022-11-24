@@ -3,6 +3,16 @@
 ## How to start the Virtual Enviroment:
 	.\venv\Scripts\activate
 
+## How to install dependencies:
+	
+	pip install flask
+	pip install flask-mysql
+
+## How to start the flask app:
+The syntax is: flask --app <appname> --debug run
+
+	flask --app app --debug run
+
 ## Useful Database Commands: 
 ### Creating the database:
 	CREATE DATABASE myapp;

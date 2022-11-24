@@ -4,6 +4,12 @@ body {
     background-color: gray;
   }
 
+  .space {
+    cursor: pointer;
+    /* height: 1000px; */
+    width: 50px;
+  }
+
   .red_space {
     color: white;
     background-color: red;

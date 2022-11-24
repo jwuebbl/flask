@@ -6,7 +6,6 @@ body {
 
   .space {
     cursor: pointer;
-    /* height: 1000px; */
     width: 50px;
   }
 
@@ -35,4 +34,8 @@ body {
     border-width: 1px;
     border-style: solid;
     text-align: center;
+  }
+
+  .col_1 {
+    
   }

@@ -187,12 +187,27 @@ body {
 
   #__221r3 {
     position: absolute;
+    left: 1476px;
+    top: 100px;
+    background: blue;
+    color: white;
+    border-color: white;
   }
   #__221r2 {
     position: absolute;
+    left: 1476px;
+    top: 170px;
+    background: blue;
+    color: white;
+    border-color: white;
   }
   #__221r1 {
     position: absolute;
+    left: 1476px;
+    top: 240px;
+    background: blue;
+    color: white;
+    border-color: white;
   }
 
   #__1t12 {
@@ -200,13 +215,19 @@ body {
     top: 310px;
     left: 252px;
     width: 357px;
+    color: white;
+    border-color: white;
+    background-color: blue;
   }
 
   #__13t24 {
     position: absolute;
     top: 310px;
     left: 660px;
-    width: 357px;
+    width: 356px;
+    color: white;
+    border-color: white;
+    background-color: blue;
   }
 
   #__25t36 {
@@ -214,6 +235,9 @@ body {
     top: 310px;
     left: 1068px;
     width: 357px;
+    color: white;
+    border-color: white;
+    background-color: blue;
   }
 
   #__1t18 {
@@ -221,6 +245,9 @@ body {
     top: 380px;
     left: 252px;
     width: 153px;
+    color: white;
+    border-color: white;
+    background-color: green;
   }
 
   #__even {
@@ -228,12 +255,15 @@ body {
     top: 380px;
     left: 456px;
     width: 153px;
+    color: white;
+    border-color: white;
+    background-color: green;
   }
 
   #__red_sel {
     position: absolute;
     background-color: red;
-    color: red;
+    color: black;
     top: 380px;
     left: 660px;
     width: 153px;
@@ -242,7 +272,7 @@ body {
   #__blk_sel {
     position: absolute;
     background-color: black;
-    color: black;
+    color: red;
     top: 380px;
     left: 864px;
     width: 153px;
@@ -253,6 +283,9 @@ body {
     top: 380px;
     left: 1068px;
     width: 153px;
+    color: white;
+    border-color: white;
+    background-color: green;
   }
 
   #__19t36 {
@@ -260,6 +293,9 @@ body {
     top: 380px;
     left: 1272px;
     width: 153px;
+    color: white;
+    border-color: white;
+    background-color: green;
   }
 
   #table {

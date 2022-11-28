@@ -260,7 +260,7 @@ body {
     background-color: green;
   }
 
-  #__red_sel {
+  #redSel {
     position: absolute;
     background-color: red;
     color: black;
@@ -269,7 +269,7 @@ body {
     width: 153px;
   }
 
-  #__blk_sel {
+  #blkSel {
     position: absolute;
     background-color: black;
     color: red;
@@ -296,13 +296,6 @@ body {
     color: white;
     border-color: white;
     background-color: green;
-  }
-
-  #table {
-    position: fixed;
-    top: 10%;
-    left: 5%;
-    background-color: blue;
   }
 
   #spc_00 {
@@ -341,18 +334,35 @@ body {
     background-color: black;
   }
 
-  #mydiv {
-    position: absolute;
-    z-index: 9;
-    background-color: #f1f1f1;
-    border: 1px solid #d3d3d3;
+  .chip {
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    background-color: #bbb;
+    display: inline-block;
     text-align: center;
   }
-  
-  #mydivheader {
-    padding: 10px;
-    cursor: move;
-    z-index: 10;
-    background-color: #2196F3;
-    color: #fff;
+
+  #chip_selection_row {
+    position: absolute;
+    top: 460px;
+    left: 252px;
+  }
+
+  #fiveChip {
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    background-color: #bbb;
+    display: inline-block;
+    text-align: center;
+  }
+
+  #table_and_chip_selections {
+    position: fixed;
+    top: 10%;
+    left: 5%;
+    background-color: blue;
   }

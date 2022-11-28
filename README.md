@@ -22,18 +22,19 @@ The syntax is: flask --app <appname> --debug run
 
 ### Creating the 'accounts' table:
 	CREATE TABLE IF NOT EXISTS `accounts` (
-		`id` int(11) NOT NULL AUTO_INCREMENT,
-		`username` varchar(50) NOT NULL,
-		`password` varchar(255) NOT NULL,
-		`email` varchar(100) NOT NULL,
-		PRIMARY KEY (`id`)
+		id int(11) NOT NULL AUTO_INCREMENT,
+		username varchar(50) NOT NULL unique,
+		password varchar(255) NULL,
+		email varchar(100) NULL,
+		chips INT NOT NULL,
+		PRIMARY KEY (id)
 	);
 
 ### Inserting a record into the 'accounts' table:
-#### Explicitly defining the primary key: 
-	INSERT INTO `accounts` (`id`, `username`, `password`, `email`) VALUES (1, 'a', 'a', 'a@a.com');
-#### Allowing the primary key to auto-generate:
-	"INSERT INTO accounts (id, username, password, email) VALUES (NULL, %s, %s, %s)", (username, 'tstst', 'tststs')
+#### Explicitly defining the primary key (MySQL Workbench): 
+	INSERT INTO `accounts` (`id`, `username`, `password`, `email`, `chips`) VALUES (1, 'a', 'a', 'a@a.com', 100);
+#### Allowing the primary key to auto-generate (In the code):
+	"INSERT INTO accounts (id, username, password, email, chips) VALUES (NULL, %s, NULL, NULL, %s)", (username, 100))
 
 ## Starting MySQL Service
 ### Option 1, Services GUI: <br>

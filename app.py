@@ -28,7 +28,7 @@ def home():
          # Redirect to home page
          return render_template('main.html')
       else:
-         cursor.execute("INSERT INTO accounts (id, username, password, email) VALUES (NULL, %s, %s, %s)", (username, 'tstst', 'tststs'))
+         cursor.execute("INSERT INTO accounts (id, username, password, email, chips) VALUES (NULL, %s, NULL, NULL, %s)", (username, 100))
          connection.commit()
          return render_template('signin.html', newaccount=username)
    if request.method == "GET": 

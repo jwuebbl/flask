@@ -30,6 +30,13 @@ The syntax is: flask --app <appname> --debug run
 		PRIMARY KEY (id)
 	);
 
+### Creating the 'roulette_spins' table:
+	CREATE TABLE roulette_spins (
+		spin_counter int NOT NULL AUTO_INCREMENT,
+		winning_space int NOT NULL,
+		PRIMARY KEY (spin_counter)
+	);
+
 ### Inserting a record into the 'accounts' table:
 #### Explicitly defining the primary key (MySQL Workbench): 
 	INSERT INTO `accounts` (`id`, `username`, `password`, `email`, `chips`) VALUES (1, 'a', 'a', 'a@a.com', 100);

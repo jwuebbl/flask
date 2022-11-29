@@ -6,16 +6,17 @@ app = Flask(__name__)
 mysql = MySQL()
 app.secret_key = 'poopoopeepee'
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = '1234qwer!@#$QWER'
+app.config['MYSQL_DATABASE_PASSWORD'] = "1234qwer!@#$QWER"
 app.config['MYSQL_DATABASE_DB'] = 'myapp'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
+connection = mysql.connect()
+cursor = connection.cursor()
+
 @app.route('/', methods=('GET', 'POST'))
 def home():
    if request.method == "POST": 
-      connection = mysql.connect()
-      cursor = connection.cursor()
       username = request.form.get("uname")
       cursor.execute("SELECT * FROM accounts WHERE username = %s", username)
       connection.commit()
@@ -53,7 +54,12 @@ def main():
 @app.route('/roulette')
 def roulette():
    if 'loggedin' in session:
-      return render_template('roulette.html')
+      # acccount, num_of_chips
+      cursor.execute("SELECT * FROM accounts WHERE username = %s", session['username'])
+      connection.commit()
+      account = cursor.fetchone()
+      print(account)
+      return render_template('roulette.html', account=account[1], num_of_chips=account[4])
    else:
       return redirect('/')      
 

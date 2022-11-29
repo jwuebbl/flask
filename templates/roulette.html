@@ -4,26 +4,68 @@
 	<title>Roulette</title>
 	<link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='images/dscim.ico') }}">
 	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/roulette.css') }}">
+	<script>
+		num_of_bets = 0;
+
+		function spinWheel() {
+			// Get all the bets.
+			// Send the bets in the request.
+			// receive more chips if a bet hit.
+		}
+
+		function allowDrop(ev) {
+		  ev.preventDefault();
+		}
+		
+		function drag(ev) {
+			var current_players_amount_of_chips = parseInt(document.getElementById('num_of_chips').innerHTML.split(" ")[2])
+			var bet_amount = parseInt(ev.target.innerHTML)
+			if (current_players_amount_of_chips >= bet_amount) {
+				ev.dataTransfer.setData("text", ev.target.id);
+			}
+		}
+		
+		function drop(ev) {
+		  ev.preventDefault();
+		  var dragged_element = document.getElementById(ev.dataTransfer.getData("text"));
+		  var current_players_amount_of_chips = parseInt(document.getElementById('num_of_chips').innerHTML.split(" ")[2])
+		  if (ev.target.className == "chip") {
+			ev.target.innerHTML = parseInt(ev.target.innerHTML) + parseInt(dragged_element.innerHTML);
+			current_players_amount_of_chips = current_players_amount_of_chips - parseInt(dragged_element.innerHTML)
+			document.getElementById('num_of_chips').innerHTML = "You have " + current_players_amount_of_chips + "chips"
+		  } else if (ev.target.childNodes.length > 1) {
+			var last_child = ev.target.lastChild;
+			var current_bet_value = last_child.innerHTML;
+			var additional_bet_value = dragged_element.innerHTML;
+			last_child.innerHTML = parseInt(current_bet_value) + parseInt(additional_bet_value);
+			current_players_amount_of_chips = current_players_amount_of_chips - parseInt(dragged_element.innerHTML)
+			document.getElementById('num_of_chips').innerHTML = "You have " + current_players_amount_of_chips + "chips"
+		  } else {
+			var ele = dragged_element.cloneNode(true);
+			ele.id = "betNum" + num_of_bets;
+			num_of_bets++;
+			ev.target.appendChild(ele);
+			current_players_amount_of_chips = current_players_amount_of_chips - parseInt(dragged_element.innerHTML)
+			document.getElementById('num_of_chips').innerHTML = "You have " + current_players_amount_of_chips + "chips"
+		  }
+		}
+	</script>
 </head>
 
 
 <body>
-	<h1> Roulette Page </h1>
-	<footer>
-		<p>Author: Jeffrey Wuebbles</p>
-	</footer>
+	<p id="signed_in_as"> Signed in as {{ account }} </p>
+	<p id="num_of_chips">You have {{ num_of_chips }} chips</p>
+	
 	<div id="table_and_chip_selections">
 		<!-- 5 rows
 			14 columns -->
 		<div id="table">
 			<div id="spc_00" class="space green_space col_1">00</div>	
-		
 			<div id="spc_0" class="space green_space col_1">0</div>
-			
 			<div id="spc_1" class="space red_space col_2">1</div>
 			<div id="spc_2" class="space blk_space col_2">2</div>
 			<div id="spc_3" class="space red_space col_2">3</div>
-		
 			<div id="spc_4" class="space blk_space col_3">4</div>
 			<div id="spc_5" class="space red_space col_3">5</div>
 			<div id="spc_6" class="space blk_space col_3">6</div>
@@ -33,7 +75,6 @@
 			<div id="spc_10" class="space blk_space col_5">10</div>
 			<div id="spc_11" class="space red_space col_5">11</div>
 			<div id="spc_12" class="space blk_space col_5">12</div>
-		
 			<div id="spc_13" class="space red_space col_6">13</div>
 			<div id="spc_14" class="space blk_space col_6">14</div>
 			<div id="spc_15" class="space red_space col_6">15</div>
@@ -46,7 +87,6 @@
 			<div id="spc_22" class="space blk_space col_9">22</div>
 			<div id="spc_23" class="space red_space col_9">23</div>
 			<div id="spc_24" class="space blk_space col_9">24</div>
-		
 			<div id="spc_25" class="space red_space col_10">25</div>
 			<div id="spc_26" class="space blk_space col_10">26</div>
 			<div id="spc_27" class="space red_space col_10">27</div>
@@ -59,57 +99,33 @@
 			<div id="spc_34" class="space blk_space col_13">34</div>
 			<div id="spc_35" class="space red_space col_13">35</div>
 			<div id="spc_36" class="space blk_space col_13">36</div>
-		
 			<div id="__221r3" class="space">2 to 1</div>
 			<div id="__221r2" class="space">2 to 1</div>
 			<div id="__221r1" class="space">2 to 1</div>
-			
 			<div id="__1t12" class="space">1st 12</div>
 			<div id="__13t24" class="space">2nd 12</div>
 			<div id="__25t36" class="space">3rd 12</div>
 			<div id="__1t18" class="space">1 to 18</div>
 			<div id="__even" class="space">EVEN</div>
-			<div name='poop1' ondrop="drop(event)" ondragover="allowDrop(event)" id="redSel" class="space">Red</div>
-			<div name='popo2' ondrop="drop(event)" ondragover="allowDrop(event)" id="blkSel" class="space">Black</div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" id="redSel" class="space">Red</div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" id="blkSel" class="space">Black</div>
 			<div id="__odd" class="space">ODD</div>
 			<div id="__19t36" class="space">19t36</div>
 		</div>
 		
 			<div id="chip_selection_row">
-				<div name='poop3' draggable="true" ondragstart="drag(event)" class="chip" id="fiveChip">5</div>
+				<div draggable="true" ondragstart="drag(event)" class="chip" id="fiveChip">5</div>
 			</div>
 		</div>
-		
-		
 		<a href="main"><button class=grey style="height:75px;width:150px">Main</button></a>
+
+		<div id="menu_bar">
+			<button onclick="spinWheel()">Spin Wheel</button>
+			<button onclick="clearBets()">Clear Bets</button>
+		</div>
+		
+
 	
-		<script>
-			num_of_bets = 0;
-	
-			function allowDrop(ev) {
-			  ev.preventDefault();
-			}
-			
-			function drag(ev) {
-			  ev.dataTransfer.setData("text", ev.target.id);
-			}
-			
-			function drop(ev) {
-			  ev.preventDefault();
-			  var dragged_element = document.getElementById(ev.dataTransfer.getData("text"));
-	
-			  if (ev.target.childNodes.length > 1) {
-				var last_child = ev.target.lastChild;
-				var current_bet_value = last_child.innerHTML;
-				var additional_bet_value = dragged_element.innerHTML;
-				last_child.innerHTML = parseInt(current_bet_value) + parseInt(additional_bet_value)
-			  } else {
-				var ele = dragged_element.cloneNode(true);
-				ele.id = "betNum" + num_of_bets;
-				num_of_bets++;
-				ev.target.appendChild(ele);
-			  }
-			}
-			</script>
+
 </body>
 </html>

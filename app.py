@@ -54,14 +54,26 @@ def main():
 @app.route('/roulette')
 def roulette():
    if 'loggedin' in session:
-      # acccount, num_of_chips
       cursor.execute("SELECT * FROM accounts WHERE username = %s", session['username'])
       connection.commit()
       account = cursor.fetchone()
-      print(account)
       return render_template('roulette.html', account=account[1], num_of_chips=account[4])
    else:
       return redirect('/')      
+
+@app.route('/makeRouletteBet', methods=['POST'])
+def makeRouletteBet():
+   print('request made')
+   bets =  request.get_json()['bets']
+   for bet in bets:
+      print(bet)
+
+   cursor.execute("SELECT * FROM accounts WHERE username = %s", session['username'])
+   connection.commit()
+   account = cursor.fetchone()
+   return render_template('roulette.html', account=account[1], num_of_chips=account[4])
+
+
 
 
 if __name__ == '__main__':

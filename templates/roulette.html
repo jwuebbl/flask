@@ -8,20 +8,22 @@
 		num_of_bets = 0;
 
 		function spinWheel() {
-			 // Get all the bets
+			// Get all the bets
 			var table = document.getElementById('table');
 			var spaces = table.children;
 			const bets = [];
 			for (let i = 0; i < spaces.length; i++) {
 				if (spaces[i].children.length > 0) {
-					const bet = [spaces[i].firstChild.data, spaces[i].lastChild.innerText]
+					const bet = [spaces[i].firstChild.data, spaces[i].lastChild.innerText];
 					bets.push(bet);
 				}
 			}
-			console.log(bets[0]);
-			 // submit request to spin the wheel
-			 // if the a bet wins payout
-
+			console.log(bets);
+			// submit request to spin the wheel
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", '/makeRouletteBet', true);
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.send(JSON.stringify({bets}));
 		}
 
 		function clearBets() {
@@ -124,9 +126,9 @@
 			<div id="spc_34" class="space blk_space col_13">34</div>
 			<div id="spc_35" class="space red_space col_13">35</div>
 			<div id="spc_36" class="space blk_space col_13">36</div>
-			<div id="__221r3" class="space">2 to 1</div>
-			<div id="__221r2" class="space">2 to 1</div>
-			<div id="__221r1" class="space">2 to 1</div>
+			<div id="r_3" class="space">2 to 1</div>
+			<div id="r_2" class="space">2 to 1</div>
+			<div id="r_1" class="space">2 to 1</div>
 			<div id="__1t12" class="space">1st 12</div>
 			<div id="__13t24" class="space">2nd 12</div>
 			<div id="__25t36" class="space">3rd 12</div>

@@ -185,30 +185,32 @@ body {
     left:1374px;
 }
 
-  #__221r3 {
-    position: absolute;
-    left: 1476px;
-    top: 100px;
-    background: blue;
-    color: white;
-    border-color: white;
-  }
-  #__221r2 {
-    position: absolute;
-    left: 1476px;
-    top: 170px;
-    background: blue;
-    color: white;
-    border-color: white;
-  }
-  #__221r1 {
-    position: absolute;
-    left: 1476px;
-    top: 240px;
-    background: blue;
-    color: white;
-    border-color: white;
-  }
+#r_3 {
+  position: absolute;
+  left: 1476px;
+  top: 100px;
+  background: blue;
+  color: white;
+  border-color: white;
+}
+
+#r_2 {
+  position: absolute;
+  left: 1476px;
+  top: 170px;
+  background: blue;
+  color: white;
+  border-color: white;
+}
+
+#r_1 {
+  position: absolute;
+  left: 1476px;
+  top: 240px;
+  background: blue;
+  color: white;
+  border-color: white;
+}
 
   #__1t12 {
     position: absolute;

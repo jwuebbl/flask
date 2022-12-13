@@ -59,7 +59,17 @@ def roulette():
       account = cursor.fetchone()
       return render_template('roulette.html', account=account[1], num_of_chips=account[4])
    else:
-      return redirect('/')      
+      return redirect('/')    
+
+@app.route('/roulette2')
+def roulette2():
+   if 'loggedin' in session:
+      cursor.execute("SELECT * FROM accounts WHERE username = %s", session['username'])
+      connection.commit()
+      account = cursor.fetchone()
+      return render_template('roulette2.html', account=account[1], num_of_chips=account[4])
+   else:
+      return redirect('/')     
 
 @app.route('/makeRouletteBet', methods=['POST'])
 def makeRouletteBet():
@@ -71,6 +81,7 @@ def makeRouletteBet():
    cursor.execute("SELECT * FROM accounts WHERE username = %s", session['username'])
    connection.commit()
    account = cursor.fetchone()
+   # roullete logic to see if i wins
    return render_template('roulette.html', account=account[1], num_of_chips=account[4])
 
 

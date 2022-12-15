@@ -348,6 +348,9 @@ body {
 
   #chip_selection_row {
     position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
     top: 460px;
     left: 252px;
   }

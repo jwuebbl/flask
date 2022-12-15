@@ -52,3 +52,4 @@ def check_bets(bets, cursor, connection, session):
         else:
             cursor.execute("UPDATE accounts SET chips = chips - %s WHERE id = %s", (amount_bet, account[0]))
             connection.commit()
+    return winning_number

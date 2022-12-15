@@ -101,6 +101,13 @@
 	{% else %}
 	<p>You have no more chips, please inform an administrator to continue.</p>
 	{% endif %}
+
+	{% if last_spin_number != None %}
+	<p id="last_winning_number">The last winning spin was: {{ last_spin_number }}</p>
+	{% else %}
+	<p>Start the betting!</p>
+	{% endif %}
+
 	
 	<div id="table_and_chip_selections">
 		<!-- 5 rows
@@ -158,10 +165,13 @@
 			<div id="g19_36" class="space">19t36</div>
 		</div>
 
-		<div id="chip_selection_row">
+		<span id="chip_selection_row">
 			<div draggable="true" ondragstart="drag(event)" class="chip" id="oneChip">1</div>
 			<div draggable="true" ondragstart="drag(event)" class="chip" id="fiveChip">5</div>
-		</div>
+			<div draggable="true" ondragstart="drag(event)" class="chip" id="tenChip">10</div>
+			<div draggable="true" ondragstart="drag(event)" class="chip" id="twentyFiveChip">25</div>
+			<div draggable="true" ondragstart="drag(event)" class="chip" id="oneHundredChip">100</div>
+		</span>
 	</div>
 	
 	<a href="main"><button class=grey style="height:75px;width:150px">Main</button></a>

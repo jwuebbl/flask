@@ -25,6 +25,7 @@
 					bets.push(bet);
 				}
 			}
+
 			// Submitting the request to spin the wheel.
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", '/makeRouletteBet', true);
@@ -47,7 +48,7 @@
 					var amount_back_to_the_player = parseInt(spaces[i].lastChild.innerHTML)
 					var current_players_amount_of_chips = parseInt(document.getElementById('num_of_chips').innerHTML.split(" ")[2])
 					current_players_amount_of_chips = current_players_amount_of_chips + parseInt(amount_back_to_the_player)
-					document.getElementById('num_of_chips').innerHTML = "You have " + current_players_amount_of_chips + " chips"
+					document.getElementById('num_of_chips').innerHTML = "You have " + current_players_amount_of_chips + " chips in your hand."
 					spaces[i].removeChild(spaces[i].lastChild)
 				}
 			}
@@ -72,21 +73,21 @@
 		  if (ev.target.className == "chip") {
 			ev.target.innerHTML = parseInt(ev.target.innerHTML) + parseInt(dragged_element.innerHTML);
 			current_players_amount_of_chips = current_players_amount_of_chips - parseInt(dragged_element.innerHTML)
-			document.getElementById('num_of_chips').innerHTML = "You have " + current_players_amount_of_chips + " chips"
+			document.getElementById('num_of_chips').innerHTML = "You have " + current_players_amount_of_chips + " chips in your hand."
 		  } else if (ev.target.childNodes.length > 1) {
 			var last_child = ev.target.lastChild;
 			var current_bet_value = last_child.innerHTML;
 			var additional_bet_value = dragged_element.innerHTML;
 			last_child.innerHTML = parseInt(current_bet_value) + parseInt(additional_bet_value);
 			current_players_amount_of_chips = current_players_amount_of_chips - parseInt(dragged_element.innerHTML)
-			document.getElementById('num_of_chips').innerHTML = "You have " + current_players_amount_of_chips + " chips"
+			document.getElementById('num_of_chips').innerHTML = "You have " + current_players_amount_of_chips + " chips in your hand."
 		  } else {
 			var ele = dragged_element.cloneNode(true);
 			ele.id = "betNum" + num_of_bets;
 			num_of_bets++;
 			ev.target.appendChild(ele);
 			current_players_amount_of_chips = current_players_amount_of_chips - parseInt(dragged_element.innerHTML)
-			document.getElementById('num_of_chips').innerHTML = "You have " + current_players_amount_of_chips + " chips"
+			document.getElementById('num_of_chips').innerHTML = "You have " + current_players_amount_of_chips + " chips in your hand."
 		  }
 		}
 	</script>
@@ -95,14 +96,18 @@
 
 <body>
 	<p id="signed_in_as"> Signed in as {{ account }} </p>
-	<p id="num_of_chips">You have {{ num_of_chips }} chips</p>
+	{% if num_of_chips > 0 %}
+	<p id="num_of_chips">You have {{ num_of_chips }} chips in your hand.</p>
+	{% else %}
+	<p>You have no more chips, please inform an administrator to continue.</p>
+	{% endif %}
 	
 	<div id="table_and_chip_selections">
 		<!-- 5 rows
 			14 columns -->
 		<div id="table">
-			<div id="spc_00" class="space green_space col_1">00</div>	
-			<div id="spc_0" class="space green_space col_1">0</div>
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" id="spc_00" class="space green_space col_1">00</div>	
+			<div ondrop="drop(event)" ondragover="allowDrop(event)" id="spc_0" class="space green_space col_1">0</div>
 			<div id="spc_1" class="space red_space col_2">1</div>
 			<div id="spc_2" class="space blk_space col_2">2</div>
 			<div id="spc_3" class="space red_space col_2">3</div>

@@ -25,6 +25,9 @@ def check_bets(bets, cursor, connection, session):
     cursor.execute("SELECT * FROM accounts WHERE username = %s", session['username'])
     connection.commit()
     account = cursor.fetchone()
+    print(account)
+    if account[4] <= 0:
+        return
     # Getting the winning number.
     winning_number = random.randint(1,38)
     # Finding the winning categories.
@@ -33,11 +36,19 @@ def check_bets(bets, cursor, connection, session):
     for bet in bets:
         users_bet = bet[0].lower()
         amount_bet = bet[1]
-        print("\t\tUser's bet:    " + bet[0].lower() + ". \t\tAmount bet: " + bet[1])
-        print("\t\tWinning Color: " + red_or_black)
+        # print("\t\tUser's bet:    " + bet[0].lower() + ". \t\tAmount bet: " + bet[1])
+        # print("\t\tWinning Color: " + red_or_black)
         if users_bet == red_or_black:
             cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (amount_bet, account[0]))
             connection.commit()
+        elif users_bet == "00" or users_bet == "0":
+            if red_or_black == "green":
+                payout = amount_bet * 35
+                cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
+                connection.commit()
+            else:
+                cursor.execute("UPDATE accounts SET chips = chips - %s WHERE id = %s", (amount_bet, account[0]))
+                connection.commit()
         else:
             cursor.execute("UPDATE accounts SET chips = chips - %s WHERE id = %s", (amount_bet, account[0]))
             connection.commit()

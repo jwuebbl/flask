@@ -4,7 +4,6 @@ import pymysql
 import games.roulette
 
 app = Flask(__name__)
-app.config["TEMPLATES_AUTO_RELOAD"] = True
 mysql = MySQL()
 app.secret_key = 'poopoopeepee'
 app.config['MYSQL_DATABASE_USER'] = 'root'
@@ -59,7 +58,6 @@ def roulette():
       cursor.execute("SELECT * FROM accounts WHERE username = %s", session['username'])
       connection.commit()
       account = cursor.fetchone()
-      print(account)
       return render_template('roulette.html', account=account[1], num_of_chips=account[4])
    else:
       return redirect('/')    

@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, url_for, flash, redirect, session
 from flaskext.mysql import MySQL
 import pymysql
+import games.roulette
 
 app = Flask(__name__)
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 mysql = MySQL()
 app.secret_key = 'poopoopeepee'
 app.config['MYSQL_DATABASE_USER'] = 'root'
@@ -57,35 +59,17 @@ def roulette():
       cursor.execute("SELECT * FROM accounts WHERE username = %s", session['username'])
       connection.commit()
       account = cursor.fetchone()
+      print(account)
       return render_template('roulette.html', account=account[1], num_of_chips=account[4])
    else:
       return redirect('/')    
 
-@app.route('/roulette2')
-def roulette2():
-   if 'loggedin' in session:
-      cursor.execute("SELECT * FROM accounts WHERE username = %s", session['username'])
-      connection.commit()
-      account = cursor.fetchone()
-      return render_template('roulette2.html', account=account[1], num_of_chips=account[4])
-   else:
-      return redirect('/')     
-
 @app.route('/makeRouletteBet', methods=['POST'])
 def makeRouletteBet():
-   print('request made')
    bets =  request.get_json()['bets']
-   for bet in bets:
-      print(bet)
-
-   cursor.execute("SELECT * FROM accounts WHERE username = %s", session['username'])
-   connection.commit()
-   account = cursor.fetchone()
-   # roullete logic to see if i wins
-   return render_template('roulette.html', account=account[1], num_of_chips=account[4])
-
-
-
+   # roullete logic to see if i win
+   games.roulette.check_bets(bets, cursor, connection, session)
+   return redirect('roulette')
 
 if __name__ == '__main__':
    app.run()

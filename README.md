@@ -43,6 +43,10 @@ The syntax is: flask --app <appname> --debug run
 #### Allowing the primary key to auto-generate (In the code):
 	"INSERT INTO accounts (id, username, password, email, chips) VALUES (NULL, %s, NULL, NULL, %s)", (username, 100))
 
+### Editing a record in the 'accounts' table:
+#### Changing the amount of chips an account has:
+	UPDATE accounts SET chips = NEW_AMOUNT_OF_CHIPS WHERE id = ACCOUNTS_ID
+
 ## Starting MySQL Service
 ### Option 1, Services GUI: <br>
 Click the start menu and start typing "Services". <br>
@@ -57,3 +61,11 @@ Start Powershell as an administrator and run the following command. <br>
 ## Useful HTML
 ### HTML for a button that submits a request to the backend:
 	<form action="/url_to_submit_to" method="post" id="this_buttons_id"><button type="submit">button_text</button></form>
+
+## Issues and their fixes.
+### Cryptography package is required:
+	I ran into this issue several times when starting the application for the first time after restarting my machine. 
+	How to fix:
+	1. Make sure that the mySql service is running.
+	2. Sign connect to the mySql server with the MySQL server workbench. 
+	I'm currently not sure why this fixes the issue but so far it has a 100% success rate of alleviating the problem.

@@ -103,7 +103,7 @@
 	{% endif %}
 
 	{% if last_spin_number != None %}
-	<p id="last_winning_number">The last winning spin was: {{ last_spin_number }}</p>
+	<p id="last_winning_number">The last winning spin was: <b>{{ last_spin_number }}, {{ last_winning_color }}</b></p>
 	{% else %}
 	<p>Start the betting!</p>
 	{% endif %}

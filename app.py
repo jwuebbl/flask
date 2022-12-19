@@ -15,6 +15,7 @@ mysql.init_app(app)
 connection = mysql.connect()
 cursor = connection.cursor()
 winning_number = None
+winning_color = None
 
 @app.route('/', methods=('GET', 'POST'))
 def home():
@@ -59,8 +60,7 @@ def roulette():
       cursor.execute("SELECT * FROM accounts WHERE username = %s", session['username'])
       connection.commit()
       account = cursor.fetchone()
-      print(winning_number)
-      return render_template('roulette.html', account=account[1], num_of_chips=account[4], last_spin_number=winning_number)
+      return render_template('roulette.html', account=account[1], num_of_chips=account[4], last_spin_number=winning_number, last_winning_color=winning_color.capitalize())
    else:
       return redirect('/')    
 
@@ -68,8 +68,12 @@ def roulette():
 def makeRouletteBet():
    bets =  request.get_json()['bets']
    # roullete logic to see if i win
-   global winning_number
-   winning_number = games.roulette.check_bets(bets, cursor, connection, session)
+   global winning_number, winning_color
+   winning_number, winning_color = games.roulette.check_bets(bets, cursor, connection, session)
+   if winning_number == 37:
+      winning_number = '0'
+   if winning_number == 38:
+      winning_number = '00'
    return redirect('roulette')
 
 if __name__ == '__main__':

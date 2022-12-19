@@ -1,13 +1,12 @@
 import random
 
-
 def print_bets(bets):
     """ Prints the bets to console for easy debugging. """
     print("Here are the bets made by the user:")
     for bet in bets:
         print("\t" + str(bet))
 
-def is_red_or_black_space(winning_number):
+def is_red_or_black_space(winning_number) -> str:
     """ Returns the string "red", "black", or "green" depending on the winning number. """
     if winning_number < 11:
         return "black" if (winning_number % 2) == 0 else "red"
@@ -17,7 +16,13 @@ def is_red_or_black_space(winning_number):
         return "black" if (winning_number % 2) == 0 else "red"
     if winning_number > 28 and winning_number < 37:
         return "red" if (winning_number % 2) == 0 else "black"
-    if winning_number > 36: return "green"
+    if winning_number > 36: return "green"\
+
+def player_has_chips(account) -> bool:
+    """ Returns 'True' if the player has more than 0 chips. """
+    if account[4] <= 0:
+        return False
+    return True
     
 def check_bets(bets, cursor, connection, session):
     """ Checks the player's bets and returns their updated account. """
@@ -25,13 +30,17 @@ def check_bets(bets, cursor, connection, session):
     cursor.execute("SELECT * FROM accounts WHERE username = %s", session['username'])
     connection.commit()
     account = cursor.fetchone()
-    print(account)
-    if account[4] <= 0:
+
+    # If the player has no more chips end their betting.
+    if player_has_chips == False:
         return
+
     # Getting the winning number.
     winning_number = random.randint(1,38)
+
     # Finding the winning categories.
     red_or_black = is_red_or_black_space(winning_number)
+
     # checking bets.
     for bet in bets:
         users_bet = bet[0].lower()
@@ -52,4 +61,4 @@ def check_bets(bets, cursor, connection, session):
         else:
             cursor.execute("UPDATE accounts SET chips = chips - %s WHERE id = %s", (amount_bet, account[0]))
             connection.commit()
-    return winning_number
+    return winning_number, red_or_black

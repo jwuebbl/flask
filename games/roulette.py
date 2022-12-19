@@ -36,7 +36,7 @@ def check_bets(bets, cursor, connection, session):
         return
 
     # Getting the winning number.
-    winning_number = random.randint(37,37)
+    winning_number = random.randint(1, 38)
 
     # Finding the winning categories.
     red_or_black = is_red_or_black_space(winning_number)
@@ -45,6 +45,7 @@ def check_bets(bets, cursor, connection, session):
     for bet in bets:
         users_bet = bet[0].lower()
         amount_bet = int(bet[1])
+        print(bet)
 
         # Remove player's chips from the table, if they win a bet their chips are returned with the payout.
         cursor.execute("UPDATE accounts SET chips = chips - %s WHERE id = %s", (amount_bet, account[0]))
@@ -64,7 +65,16 @@ def check_bets(bets, cursor, connection, session):
             payout = amount_bet * 2
             cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
             connection.commit()
-        
+        # 1 to 18
+        if users_bet == "1 to 18" and winning_number < 19:
+            payout = amount_bet * 2
+            cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
+            connection.commit()
+        # 19 to 36
+        if users_bet == "19 to 36" and winning_number > 18 and winning_number < 37:
+            payout = amount_bet * 2
+            cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
+            connection.commit()
 
 
     return winning_number, red_or_black

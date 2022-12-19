@@ -36,7 +36,7 @@ def check_bets(bets, cursor, connection, session):
         return
 
     # Getting the winning number.
-    winning_number = random.randint(1,38)
+    winning_number = random.randint(37,37)
 
     # Finding the winning categories.
     red_or_black = is_red_or_black_space(winning_number)
@@ -44,21 +44,27 @@ def check_bets(bets, cursor, connection, session):
     # checking bets.
     for bet in bets:
         users_bet = bet[0].lower()
-        amount_bet = bet[1]
-        # print("\t\tUser's bet:    " + bet[0].lower() + ". \t\tAmount bet: " + bet[1])
-        # print("\t\tWinning Color: " + red_or_black)
+        amount_bet = int(bet[1])
+
+        # Remove player's chips from the table, if they win a bet their chips are returned with the payout.
+        cursor.execute("UPDATE accounts SET chips = chips - %s WHERE id = %s", (amount_bet, account[0]))
+        connection.commit()
+
+        # 00 or 0
+        if users_bet == "00" and winning_number == 38:
+            payout = amount_bet * 36
+            cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
+            connection.commit()
+        if users_bet == "0" and winning_number == 37:
+            payout = amount_bet * 36
+            cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
+            connection.commit()
+        # Red or Black
         if users_bet == red_or_black:
-            cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (amount_bet, account[0]))
+            payout = amount_bet * 2
+            cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
             connection.commit()
-        elif users_bet == "00" or users_bet == "0":
-            if red_or_black == "green":
-                payout = amount_bet * 35
-                cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
-                connection.commit()
-            else:
-                cursor.execute("UPDATE accounts SET chips = chips - %s WHERE id = %s", (amount_bet, account[0]))
-                connection.commit()
-        else:
-            cursor.execute("UPDATE accounts SET chips = chips - %s WHERE id = %s", (amount_bet, account[0]))
-            connection.commit()
+        
+
+
     return winning_number, red_or_black

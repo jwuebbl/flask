@@ -14,8 +14,8 @@ mysql.init_app(app)
 
 connection = mysql.connect()
 cursor = connection.cursor()
-winning_number = None
-winning_color = None
+winning_number = 38
+winning_color = 'green'
 
 @app.route('/', methods=('GET', 'POST'))
 def home():

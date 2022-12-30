@@ -25,11 +25,13 @@ def player_has_chips(account) -> bool:
     return True
     
 def is_even(num):
+    '''Returns True if a number is even.'''
     if num % 2 == 0:
         return True
     return False
 
 def is_odd(num):
+    '''Returns True if a number is odd.'''
     if num % 2 == 1:
         return True
     return False
@@ -85,13 +87,12 @@ def check_bets(bets, cursor, connection, session):
             payout = amount_bet * 2
             cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
             connection.commit()
-        
-        if users_bet == "even" and is_even(winning_number):
+        # Even and Odd
+        if users_bet == "EVEN" and is_even(winning_number) and winning_number < 37:
             payout = amount_bet * 2
             cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
             connection.commit()
-
-        if users_bet == "odd" and is_odd(winning_number):
+        if users_bet == "ODD" and is_odd(winning_number) and winning_number < 37:
             payout = amount_bet * 2
             cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
             connection.commit()

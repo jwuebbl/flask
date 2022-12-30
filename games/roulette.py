@@ -36,6 +36,21 @@ def is_odd(num):
         return True
     return False
 
+def is_row_3(num):
+    if num % 3 == 0:
+        return True
+    return False
+
+def is_row_2(num):
+    if (num % 3) - 2 == 0:
+        return True
+    return False
+
+def is_row_1(num):
+    if (num % 3) - 1 == 0:
+        return True
+    return False
+
 def check_bets(bets, cursor, connection, session):
     """ Checks the player's bets and returns their updated account. """
     # Getting the user's account.
@@ -96,5 +111,22 @@ def check_bets(bets, cursor, connection, session):
             payout = amount_bet * 2
             cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
             connection.commit()
+        if users_bet == "row 3" and is_row_3(winning_number) and winning_number < 37:
+            payout = amount_bet * 3
+            cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
+            connection.commit()
+        if users_bet == "row 2" and is_row_2(winning_number) and winning_number < 37:
+            payout = amount_bet * 3
+            cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
+            connection.commit()
+        if users_bet == "row 1" and is_row_1(winning_number) and winning_number < 37:
+            payout = amount_bet * 3
+            cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
+            connection.commit()
+        # 1st 12
+
+        # 2nd 12
+
+        # 3rd 12
 
     return winning_number, red_or_black

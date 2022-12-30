@@ -51,6 +51,21 @@ def is_row_1(num):
         return True
     return False
 
+def is_first_12(num):
+    if num < 13:
+        return True
+    return False
+
+def is_second_12(num):
+    if num > 12 and num < 25:
+        return True
+    return False
+
+def is_third_12(num):
+    if num > 24 and num < 37:
+        return True
+    return False
+
 def check_bets(bets, cursor, connection, session):
     """ Checks the player's bets and returns their updated account. """
     # Getting the user's account.
@@ -124,9 +139,21 @@ def check_bets(bets, cursor, connection, session):
             cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
             connection.commit()
         # 1st 12
+        if users_bet == "1st 12" and is_first_12(winning_number) and winning_number < 37:
+            payout = amount_bet * 3
+            cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
+            connection.commit()
 
         # 2nd 12
+        if users_bet == "2nd 12" and is_second_12(winning_number) and winning_number < 37:
+            payout = amount_bet * 3
+            cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
+            connection.commit()
 
         # 3rd 12
+        if users_bet == "3rd 12" and is_third_12(winning_number) and winning_number < 37:
+            payout = amount_bet * 3
+            cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
+            connection.commit()
 
     return winning_number, red_or_black

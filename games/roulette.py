@@ -156,4 +156,10 @@ def check_bets(bets, cursor, connection, session):
             cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
             connection.commit()
 
+        # Individual Numbers
+        if users_bet == str(winning_number):
+            payout = amount_bet * 36
+            cursor.execute("UPDATE accounts SET chips = chips + %s WHERE id = %s", (payout, account[0]))
+            connection.commit()
+
     return winning_number, red_or_black

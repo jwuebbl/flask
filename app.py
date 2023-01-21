@@ -21,9 +21,9 @@ winning_color = 'green'
 def home():
    if request.method == "POST": 
       username = request.form.get("uname")
-      # cursor.execute("SELECT * FROM accounts WHERE username = %s", username)
-      # connection.commit()
-      # account = cursor.fetchone()
+      cursor.execute("SELECT * FROM accounts WHERE username = %s", username)
+      connection.commit()
+      account = cursor.fetchone()
       if account:
          # Create session data, we can access this data in other routes
          session['loggedin'] = True

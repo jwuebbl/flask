@@ -69,3 +69,7 @@ Start Powershell as an administrator and run the following command. <br>
 	1. Make sure that the mySql service is running.
 	2. Sign connect to the mySql server with the MySQL server workbench. 
 	I'm currently not sure why this fixes the issue but so far it has a 100% success rate of alleviating the problem.
+
+### stuff
+docker build -t flaskapp:1.0.0 .
+docker run -p 5000:5000 -d flaskapp:1.0.0 

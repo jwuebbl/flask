@@ -1,9 +1,11 @@
 version: "2"
 services:
   app:
+    # Builds the dockerfile in the ./app/ directory.
     build: ./app/
     links:
       - db
+    # Maps my machine's port 5000 to the containers port 5000.
     ports:
       - "5000:5000"
   db:

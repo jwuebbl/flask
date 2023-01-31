@@ -1,34 +1,7 @@
-# version: '3'
-# services:
-#   jeffs-app:
-#     build: ./
-#     image: flask:1.0
-#     ports:
-#       - 5000:5000
-#     environment:
-#       FLASK_APP: app.py
-#       FLASK_ENV: development
-#       MYSQL_DATABASE: myapp
-#       MYSQL_HOST: db
-#       MYSQL_PASSWORD: poop
-#       MYSQL_PORT: 3306
-#       MYSQL_USER: root
-#     depends_on:
-#       - db
-#   db:
-#     build: ./mysql/
-#     image: mysql:latest
-#     environment:
-#       MYSQL_DATABASE: myapp
-#       MYSQL_ROOT_PASSWORD: poop
-#     volumes:
-#       - /var/lib/mysql:/var/lib/mysql
-
-
 version: "2"
 services:
   app:
-    build: ./
+    build: ./app/
     links:
       - db
     ports:

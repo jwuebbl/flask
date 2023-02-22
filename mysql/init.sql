@@ -11,8 +11,9 @@ CREATE TABLE IF NOT EXISTS `accounts` (
     PRIMARY KEY (id)
 );
 
--- CREATE TABLE IF NOT EXISTS 'roulette_spins' (
---     spin_counter int NOT NULL AUTO_INCREMENT,
---     winning_space int NOT NULL,
---     PRIMARY KEY (spin_counter)
--- );
+CREATE TABLE IF NOT EXISTS `roulette_spins` (
+    spin_id int NOT NULL AUTO_INCREMENT,
+    winning_space int NOT NULL,
+    winning_color varchar(5),
+    PRIMARY KEY (spin_id)
+);

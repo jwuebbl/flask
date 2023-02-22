@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, url_for, flash, redirect, session
 from flaskext.mysql import MySQL
 import pymysql
-import games.roulette
 import sys
 
 app = Flask(__name__)
@@ -19,6 +18,7 @@ else:
    exit
 
 mysql.init_app(app)
+import games.roulette
 
 winning_number = 38
 winning_color = 'green'
@@ -76,6 +76,16 @@ def roulette():
       return render_template('roulette.html', account=account[1], num_of_chips=account[4], last_spin_number=winning_number, last_winning_color=winning_color.capitalize())
    else:
       return redirect('/')    
+   
+@app.route('/roulette_simulation', methods=['GET', 'POST'])
+def roulette_simulation():
+   if request.method == "GET":
+      if 'loggedin' in session:
+         return render_template('roulette_simulation.html')
+      else:
+         return redirect('/')    
+   else:
+      print('post method received.')
 
 @app.route('/makeRouletteBet', methods=['POST'])
 def makeRouletteBet():

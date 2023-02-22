@@ -1,4 +1,5 @@
 import random
+from app import mysql
 
 def print_bets(bets):
     """ Prints the bets to console for easy debugging. """
@@ -6,7 +7,7 @@ def print_bets(bets):
     for bet in bets:
         print("\t" + str(bet))
 
-def is_red_or_black_space(winning_number) -> str:
+def get_space_color(winning_number) -> str:
     """ Returns the string "red", "black", or "green" depending on the winning number. """
     if winning_number < 11:
         return "black" if (winning_number % 2) == 0 else "red"
@@ -16,7 +17,7 @@ def is_red_or_black_space(winning_number) -> str:
         return "black" if (winning_number % 2) == 0 else "red"
     if winning_number > 28 and winning_number < 37:
         return "red" if (winning_number % 2) == 0 else "black"
-    if winning_number > 36: return "green"\
+    if winning_number > 36: return "green"
 
 def player_has_chips(account) -> bool:
     """ Returns 'True' if the player has more than 0 chips. """
@@ -66,6 +67,18 @@ def is_third_12(num):
         return True
     return False
 
+def spin_the_wheel() -> int:
+    """ Gets the winning number and its color. Also inserts the winning number and its color into the roulette_spins table."""
+    winning_number = random.randint(1, 38)
+    red_or_black = get_space_color(winning_number)
+    connection = mysql.connect()
+    cursor = connection.cursor()
+    cursor.execute("INSERT INTO roulette_spins (spin_id, winning_space, winning_color) VALUES (NULL, %s, %s)", (winning_number, red_or_black))
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return winning_number
+
 def check_bets(bets, cursor, connection, session):
     """ Checks the player's bets and returns their updated account. """
     # Getting the user's account.
@@ -77,11 +90,10 @@ def check_bets(bets, cursor, connection, session):
     if player_has_chips(account) == False:
         return
 
-    # Getting the winning number.
-    winning_number = random.randint(1, 38)
+    winning_number = spin_the_wheel()
 
     # Finding the winning categories.
-    red_or_black = is_red_or_black_space(winning_number)
+    red_or_black = get_space_color(winning_number)
 
     # checking bets.
     for bet in bets:

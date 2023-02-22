@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, url_for, flash, redirect, ses
 from flaskext.mysql import MySQL
 import pymysql
 import games.roulette
+import sys
 
 app = Flask(__name__)
 mysql = MySQL()
@@ -9,7 +10,14 @@ app.secret_key = 'poopoopeepee'
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = "poop"
 app.config['MYSQL_DATABASE_DB'] = 'myapp'
-app.config['MYSQL_DATABASE_HOST'] = 'db'
+if sys.platform == 'linux':
+   app.config['MYSQL_DATABASE_HOST'] = 'db'
+elif sys.platform == 'win32':
+   app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+else:
+   print('Boi what is you running this app on??')
+   exit
+
 mysql.init_app(app)
 
 winning_number = 38
@@ -17,15 +25,12 @@ winning_color = 'green'
 
 connection = mysql.connect()
 cursor = connection.cursor()
-
-      
       
 @app.route('/', methods=('GET', 'POST'))
 def home():
    if request.method == "POST": 
-      print('POST detected.')
       username = request.form.get("uname")
-      print('Pulled: ' + username + ' from the form.')
+      print(username, file=sys.stderr)
       cursor.execute("SELECT * FROM accounts WHERE username = %s", username)
       print('cursor executed the query.')
       connection.commit()
@@ -74,15 +79,18 @@ def roulette():
 
 @app.route('/makeRouletteBet', methods=['POST'])
 def makeRouletteBet():
-   bets =  request.get_json()['bets']
-   # roullete logic to see if i win
-   global winning_number, winning_color
-   winning_number, winning_color = games.roulette.check_bets(bets, cursor, connection, session)
-   if winning_number == 37:
-      winning_number = '0'
-   if winning_number == 38:
-      winning_number = '00'
-   return redirect('roulette')
+   if 'loggedin' in session:
+      bets =  request.get_json()['bets']
+      # roullete logic to see if i win
+      global winning_number, winning_color
+      winning_number, winning_color = games.roulette.check_bets(bets, cursor, connection, session)
+      if winning_number == 37:
+         winning_number = '0'
+      if winning_number == 38:
+         winning_number = '00'
+      return redirect('roulette')
+   else:
+      return redirect('/')
 
 if __name__ == '__main__':
    app.run(debug=True, host='0.0.0.0')

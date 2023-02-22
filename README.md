@@ -1,12 +1,17 @@
 # Experimental Flask App
 ## Author: Jeffrey Wuebbles
+
 ## How to start the Virtual Enviroment:
 	.\venv\Scripts\activate
 
-## How to install dependencies:
+## How to generate requirements.txt
+Note: Make sure the virtual environment is started before generating requirements.txt
+
+    pip freeze > requirements.txt
+
+## How to install dependencies from requirements.txt:
 	
-	pip install flask
-	pip install flask-mysql
+	pip install -r /app/requirements.txt
 
 ## How to start the flask app locally:
 The syntax is: flask --app <appname> --debug run

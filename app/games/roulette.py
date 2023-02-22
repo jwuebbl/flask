@@ -74,7 +74,7 @@ def check_bets(bets, cursor, connection, session):
     account = cursor.fetchone()
 
     # If the player has no more chips end their betting.
-    if player_has_chips == False:
+    if player_has_chips(account) == False:
         return
 
     # Getting the winning number.

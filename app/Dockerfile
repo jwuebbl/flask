@@ -16,4 +16,4 @@ RUN pip install gunicorn
 EXPOSE 8000
 
 # Run the command to start Gunicorn
-CMD ["gunicorn", "myapp:app", "-b", "0.0.0.0:8000"]
+CMD ["gunicorn", "app:app", "-b", "0.0.0.0:8000"]

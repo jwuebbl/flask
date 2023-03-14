@@ -1,10 +1,19 @@
-# start by pulling the python image
-FROM python:slim
+FROM python:3.9
 
-# copy every content from the local file to the image
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
 COPY . /app
 
-# install the dependencies and packages in the requirements file
-RUN pip install -r /app/requirements.txt
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-CMD sleep 20s && python /app/app.py
+# Install Gunicorn
+RUN pip install gunicorn
+
+# Make port 8000 available to the world outside this container
+EXPOSE 8000
+
+# Run the command to start Gunicorn
+CMD ["gunicorn", "myapp:app", "-b", "0.0.0.0:8000"]

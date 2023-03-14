@@ -9,6 +9,8 @@ services:
     # Maps my machine's port 5000 to the containers port 5000.
     ports:
       - "8000:8000"
+    networks:
+      - main-network
   db:
     image: mysql:latest
     ports:
@@ -17,6 +19,8 @@ services:
       MYSQL_ROOT_PASSWORD: poop
     volumes:
       - ./mysql:/docker-entrypoint-initdb.d/:ro
+    networks:
+      - main-network
   nginx:
     image: nginx:latest
     ports:
@@ -25,3 +29,8 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - app
+    networks:
+      - main-network
+networks:
+  main-network:
+    driver: bridge

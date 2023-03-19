@@ -50,3 +50,7 @@
 .form__button:hover {
   background-color: #0066BB;
 }
+
+body {
+  background: blue
+}

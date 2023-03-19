@@ -21,5 +21,8 @@
         <button class="form__button" type="submit">Sign In</button>
       </form>
     </div>
+  {% if newaccount %}
+	<p id="newAccountMessage">Account "{{ newaccount }}" created! <br> You may now sign in with it.</p>
+	{% endif %}
   </body>
 </html>

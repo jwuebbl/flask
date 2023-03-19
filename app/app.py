@@ -47,9 +47,9 @@ def home():
       else:
          cursor.execute("INSERT INTO accounts (id, username, password, email, chips) VALUES (NULL, %s, NULL, NULL, %s)", (username, 100))
          connection.commit()
-         return render_template('signin.html', newaccount=username)
+         return render_template('gen_signin.html', newaccount=username)
    if request.method == "GET": 
-      return render_template('signin.html')
+      return render_template('gen_signin.html')
 
 @app.route('/logout')
 def logout():

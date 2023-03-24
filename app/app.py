@@ -49,7 +49,7 @@ def home():
          connection.commit()
          return render_template('gen_signin.html', newaccount=username)
    if request.method == "GET": 
-      return render_template('gen_signin.html')
+      return render_template('index.html')
 
 @app.route('/logout')
 def logout():

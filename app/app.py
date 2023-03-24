@@ -49,6 +49,7 @@ def home():
          connection.commit()
          return render_template('gen_signin.html', newaccount=username)
    if request.method == "GET": 
+      # index.html is the angular webpage.
       return render_template('index.html')
 
 @app.route('/logout')

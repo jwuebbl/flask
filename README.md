@@ -50,3 +50,4 @@ Start Powershell as an administrator and run the following command. <br>
 ```
 	docker-compose down -v
 ```
+test

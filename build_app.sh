@@ -1,1 +1,0 @@
-if (pwd) != /c/Users/JeffW/Desktop/flask/golf || (pwd) != 

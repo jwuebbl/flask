@@ -7,8 +7,13 @@ import { Component } from '@angular/core';
 })
 export class CountingBoxComponent {
   count = 0;
-  handleClick() {
+
+
+  increaseCount() {
     this.count++;
-    console.log(this.count)
+  }
+  
+  decreaseCount() {
+    this.count--;
   }
 }

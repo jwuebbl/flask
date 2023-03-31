@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./counting-box.component.css']
 })
 export class CountingBoxComponent {
-
+  count = 0;
+  handleClick() {
+    this.count++;
+    console.log(this.count)
+  }
 }

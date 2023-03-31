@@ -1,0 +1,9 @@
+.box {
+    width: 100px;
+    height: 100px;
+    background-color: lightblue;
+    text-align: center;
+    line-height: 100px;
+    font-size: 24px;
+    cursor: pointer;
+}

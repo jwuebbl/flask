@@ -3,10 +3,11 @@ function runApp() {
 }
 
 if [ "$(pwd)" = "/home/ubuntu/flask/golf" ]; then
-    echo "Correct directory, running application"
+    echo "buildApp.sh called from $(pwd)."
     runApp
 elif [ "$(pwd)" = "/home/ubuntu/flask" ]; then
     echo "buildApp.sh called from $(pwd)."
+    cd ./golf
     runApp
 else
     echo "Can't run the script from this directory"

@@ -6,6 +6,6 @@ function runApp() {
 }
 
 if [ "$pwd" == "/home/ubuntu/flask/golf" ]; then
-    echo "Correct directory, running application";
-    runApp();
+    echo "Correct directory, running application"
+    runApp
 fi

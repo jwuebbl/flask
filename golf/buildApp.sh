@@ -3,6 +3,8 @@ if [ $(pwd) = "/c/Users/JeffW/Desktop/flask" ]; then
 fi
 
 
-ng build
+ng build --base-href "/static/" 
 
 cp ./dist/golf/*.js ../app/static
+cp ./dist/golf/*.css ../app/static
+cp ./dist/golf/*.html ../app/templates/index.html

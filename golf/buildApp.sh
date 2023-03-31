@@ -1,15 +1,8 @@
-function runApp() {
-    echo "runApp() called."
-}
-
-if [ "$(pwd)" = "/home/ubuntu/flask/golf" ]; then
-    echo "buildApp.sh called from $(pwd)."
-    runApp
-elif [ "$(pwd)" = "/home/ubuntu/flask" ]; then
-    echo "buildApp.sh called from $(pwd)."
+if [ $(pwd) = "/c/Users/JeffW/Desktop/flask" ]; then
     cd ./golf
-    runApp
-else
-    echo "Can't run the script from this directory"
-    exit
 fi
+
+
+ng build
+
+cp ./dist/golf/*.js ../app/static

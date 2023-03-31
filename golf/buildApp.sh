@@ -7,4 +7,5 @@ if [ "$(pwd)" = "/home/ubuntu/flask/golf" ]; then
     runApp
 elif [ "$(pwd)" = "/home/ubuntu/flask" ]; then
     cd ./golf
+    echo $(pwd)
 fi

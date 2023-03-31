@@ -5,16 +5,18 @@
 	.\venv\Scripts\activate
 
 ## How to generate requirements.txt
-Note: Make sure the virtual environment is started before generating requirements.txt
+* Do this when you want to save all the python dependencies you may have added while developing.
+* Make sure the virtual environment is started before generating requirements.txt
 
     pip freeze > requirements.txt
 
 ## How to install dependencies from requirements.txt:
+* This is run on the host/image to get the python packages installed.
 	
 	pip install -r /app/requirements.txt
 
 ## How to start the flask app locally:
-The syntax is: flask --app <appname> --debug run
+* Note: The syntax is: ```flask --app <appname> --debug run```
 
 	flask --app app --debug run
 
@@ -50,4 +52,7 @@ Start Powershell as an administrator and run the following command. <br>
 ```
 	docker-compose down -v
 ```
-test
+
+### SSH Command to access the Golf EC2
+
+	ssh -i "Golf.pem" ubuntu@ec2-3-138-117-65.us-east-2.compute.amazonaws.com

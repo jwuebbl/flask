@@ -105,7 +105,6 @@ def makeRouletteBet():
       return redirect('/')
    
 @app.route('/submitLeagueGame', methods=['OPTIONS', 'GET', 'POST'])
-@cross_origin()
 def submitLeagueGame():
    if 'loggedin' in session:
       if request.method == "OPTIONS":
@@ -115,6 +114,7 @@ def submitLeagueGame():
          response.headers.add("Access-Control-Allow-Headers", "*")
          response.headers.add("Access-Control-Allow-Methods", "*")
          return response
+      
       if request.method == "POST":
          print('post')
          char = request.json['char']
@@ -125,7 +125,8 @@ def submitLeagueGame():
          connection.commit()
          response = make_response('')
          return response
-      else:
+      
+      if request.method == "GET":
          return render_template("LoLKda.html")
 
 

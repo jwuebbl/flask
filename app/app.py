@@ -105,6 +105,7 @@ def makeRouletteBet():
       return redirect('/')
    
 @app.route('/submitLeagueGame', methods=['OPTIONS', 'GET', 'POST'])
+@cross_origin()
 def submitLeagueGame():
    if 'loggedin' in session:
       if request.method == "OPTIONS":

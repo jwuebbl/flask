@@ -109,19 +109,21 @@ def makeRouletteBet():
 def submitLeagueGame():
    if 'loggedin' in session:
       if request.method == "OPTIONS":
+         print('options')
          response = make_response()
          response.headers.add("Access-Control-Allow-Origin", "*")
          response.headers.add("Access-Control-Allow-Headers", "*")
          response.headers.add("Access-Control-Allow-Methods", "*")
          return response
       if request.method == "POST":
+         print('post')
          char = request.json['char']
          kills = request.json['kills']
          deaths = request.json['deaths']
          assists = request.json['assists']
          cursor.callproc('addLeageGame', [int(session['id']), str(char), int(kills), int(deaths), int(assists)])
          connection.commit()
-         response = make_response('200')
+         response = make_response('')
          return response
       else:
          return render_template("LoLKda.html")

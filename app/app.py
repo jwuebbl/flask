@@ -6,7 +6,7 @@ from flask_cors import CORS, cross_origin
 
 
 app = Flask(__name__)
-cors = CORS(app)
+CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 mysql = MySQL()
@@ -105,7 +105,6 @@ def makeRouletteBet():
       return redirect('/')
    
 @app.route('/submitLeagueGame', methods=['OPTIONS', 'GET', 'POST'])
-@cross_origin()
 def submitLeagueGame():
    if 'loggedin' in session:
       if request.method == "OPTIONS":

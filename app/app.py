@@ -1,9 +1,14 @@
-from flask import Flask, render_template, request, url_for, flash, redirect, session
+from flask import Flask, make_response, render_template, request, url_for, flash, redirect, session, jsonify
 from flaskext.mysql import MySQL
 import pymysql
 import sys
+from flask_cors import CORS, cross_origin
+
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
 mysql = MySQL()
 app.secret_key = 'poopoopeepee'
 app.config['MYSQL_DATABASE_USER'] = 'root'
@@ -30,13 +35,9 @@ cursor = connection.cursor()
 def home():
    if request.method == "POST": 
       username = request.form.get("uname")
-      print(username, file=sys.stderr)
       cursor.execute("SELECT * FROM accounts WHERE username = %s", username)
-      print('cursor executed the query.')
       connection.commit()
-      print('connection commited the query')
       account = cursor.fetchone()
-      print(account)
       if account:
          # Create session data, we can access this data in other routes
          session['loggedin'] = True
@@ -47,10 +48,10 @@ def home():
       else:
          cursor.execute("INSERT INTO accounts (id, username, password, email, chips) VALUES (NULL, %s, NULL, NULL, %s)", (username, 100))
          connection.commit()
-         return render_template('gen_signin.html', newaccount=username)
+         return render_template('signin.html')
    if request.method == "GET": 
       # index.html is the angular webpage.
-      return render_template('index.html')
+      return render_template('signin.html')
 
 @app.route('/logout')
 def logout():
@@ -86,7 +87,7 @@ def roulette_simulation():
       else:
          return redirect('/')    
    else:
-      print('post method received.')
+      print('/roulette_simulation post method received.')
 
 @app.route('/makeRouletteBet', methods=['POST'])
 def makeRouletteBet():
@@ -102,6 +103,31 @@ def makeRouletteBet():
       return redirect('roulette')
    else:
       return redirect('/')
+   
+@app.route('/submitLeagueGame', methods=['OPTIONS', 'GET', 'POST'])
+@cross_origin()
+def submitLeagueGame():
+   if 'loggedin' in session:
+      if request.method == "OPTIONS":
+         response = make_response()
+         response.headers.add("Access-Control-Allow-Origin", "*")
+         response.headers.add("Access-Control-Allow-Headers", "*")
+         response.headers.add("Access-Control-Allow-Methods", "*")
+         return response
+      if request.method == "POST":
+         char = request.json['char']
+         kills = request.json['kills']
+         deaths = request.json['deaths']
+         assists = request.json['assists']
+         cursor.callproc('addLeageGame', [int(session['id']), str(char), int(kills), int(deaths), int(assists)])
+         connection.commit()
+         response = make_response('200')
+         return response
+      else:
+         return render_template("LoLKda.html")
+
+
+   
 
 if __name__ == '__main__':
    app.run(debug=True, host='0.0.0.0')

@@ -17,3 +17,21 @@ CREATE TABLE IF NOT EXISTS `roulette_spins` (
     winning_color varchar(5),
     PRIMARY KEY (spin_id)
 );
+
+CREATE TABLE IF NOT EXISTS `leagueGames` (
+    gameNum int NOT NULL AUTO_INCREMENT,
+    accountId int NOT NULL,
+    leagueChar varchar(50) NOT NULL,
+    kills int NOT NULL,
+    deaths int NOT NULL,
+    assists int NOT NULL,
+    PRIMARY KEY (gameNum),
+    FOREIGN KEY (accountId) REFERENCES accounts(id)
+);
+
+DELIMITER //
+CREATE PROCEDURE `addLeageGame`(IN arg_accountId INT, IN arg_leagueChar varchar(50), IN arg_kills INT, IN arg_deaths INT, IN arg_assists INT)
+BEGIN
+	INSERT INTO leagueGames (gameNum, accountId, leagueChar, kills, deaths, assists) VALUES (null, arg_accountId, arg_leagueChar, arg_kills, arg_deaths, arg_assists);
+END //
+DELIMITER ;

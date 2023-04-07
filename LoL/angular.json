@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "golf": {
+    "LoL": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,8 +13,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/golf",
-            "index": "src/index.html",
+            "outputPath": "dist/lo-l",
+            "index": "src/LoLKda.html",
             "main": "src/main.ts",
             "polyfills": [
               "zone.js"
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "golf:build:production"
+              "browserTarget": "LoL:build:production"
             },
             "development": {
-              "browserTarget": "golf:build:development"
+              "browserTarget": "LoL:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "golf:build"
+            "browserTarget": "LoL:build"
           }
         },
         "test": {

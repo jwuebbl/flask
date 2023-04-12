@@ -20,11 +20,9 @@ services:
     networks:
       - main-network
   nginx:
-    image: nginx:latest
+    image: jwuebblz/league_kda_angular:latest
     ports:
       - "80:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - app
     networks:

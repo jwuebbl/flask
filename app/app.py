@@ -124,7 +124,7 @@ def submitLeagueGame():
          response = make_response('')
          return response
       if request.method == "GET":
-         return render_template('')
+         return redirect('/LoLKDA')
    else:
       return redirect('/')
 

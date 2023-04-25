@@ -50,7 +50,6 @@ def home():
          connection.commit()
          return render_template('signin.html')
    if request.method == "GET": 
-      # index.html is the angular webpage.
       return render_template('signin.html')
 
 @app.route('/logout')
@@ -125,7 +124,7 @@ def submitLeagueGame():
          response = make_response('')
          return response
       if request.method == "GET":
-         return redirect("http://localhost/LoLKDA", code=302)
+         return render_template('')
    else:
       return redirect('/')
 

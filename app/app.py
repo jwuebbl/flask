@@ -62,7 +62,7 @@ def logout():
    return redirect('/')
 
 @app.route('/menu', methods=('GET', 'POST'))
-def main():
+def menu():
    if 'loggedin' in session:
       return render_template('menu.html')
    else:

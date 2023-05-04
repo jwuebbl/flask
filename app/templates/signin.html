@@ -8,6 +8,10 @@
 
 <body>
 	<h1>Welcome!</h1>
+
+	{% if newaccount %}
+	<p id="newAccountMessage">Account "{{ newaccount }}" created! <br> You may now sign in with it.</p>
+	{% endif %}
 	
 	<div id="loginDiv">
 	<!-- Turning autocomplete on allows the browser to complete values the user has used before. -->
@@ -17,9 +21,7 @@
 		</form>
 	</div>
 
-	{% if newaccount %}
-	<p id="newAccountMessage">Account "{{ newaccount }}" created! <br> You may now sign in with it.</p>
-	{% endif %}
+
 	
 	<footer>
 		<p>Author: Jeffrey Wuebbles<br>

@@ -44,7 +44,7 @@ def home():
          session['id'] = account[0]
          session['username'] = account[1]
          # Redirect to home page
-         return render_template('main.html')
+         return render_template('menu.html')
       else:
          cursor.execute("INSERT INTO accounts (id, username, password, email, chips) VALUES (NULL, %s, NULL, NULL, %s)", (username, 100))
          connection.commit()
@@ -61,10 +61,10 @@ def logout():
    # Redirect to login page
    return redirect('/')
 
-@app.route('/main', methods=('GET', 'POST'))
+@app.route('/menu', methods=('GET', 'POST'))
 def main():
    if 'loggedin' in session:
-      return render_template('main.html')
+      return render_template('menu.html')
    else:
       return redirect('/')
 

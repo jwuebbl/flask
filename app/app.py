@@ -33,24 +33,24 @@ cursor = connection.cursor()
       
 @app.route('/', methods=('GET', 'POST'))
 def home():
-   if request.method == "POST": 
+   if request.method == "GET": 
+      return render_template('signin.html')
+   if request.method == "POST":
       username = request.form.get("uname")
       cursor.execute("SELECT * FROM accounts WHERE username = %s", username)
       connection.commit()
       account = cursor.fetchone()
       if account:
-         # Create session data, we can access this data in other routes
          session['loggedin'] = True
          session['id'] = account[0]
          session['username'] = account[1]
-         # Redirect to home page
-         return render_template('menu.html')
+         return redirect(url_for('menu.html'))
       else:
          cursor.execute("INSERT INTO accounts (id, username, password, email, chips) VALUES (NULL, %s, NULL, NULL, %s)", (username, 100))
          connection.commit()
+         newaccount = True
          return render_template('signin.html')
-   if request.method == "GET": 
-      return render_template('signin.html')
+
 
 @app.route('/logout')
 def logout():

@@ -1,58 +1,103 @@
-# Experimental Flask App
-## Author: Jeffrey Wuebbles
+# Jeffrey Wuebbles's Flask App
+## Table of Contents
+* This section is for notes on running the Flask application locally:
+	* [Python Virtual Environment Notes](#pythonVirtualEnvironmentNotes)
+		* [How to Create a Python Virtual Environment](#creatingPythonVirtualEnvironment)
+		* [How to Start a Python Virtual Environment](#startingPythonVirtualEnvironment)
+		* [How to Stop a Python Virtual Environment](#stoppingPythonVirtualEnvironment)
+	* [Python Dependencies Notes](#pythonPackageDependenciesNotes)
+	* [How to Install Dependencies From requirements.txt](#installingFromRequirementsTxt)
+	* [How to Generate the requirements.txt File](#generatingRequirementsTxt)
+	* [How to Start the Flask Application Locally](#startingFlaskApp)
+	* [Notes on MySQL](#notesOnMySqlOnHost)
+		* [How to Start MySQL Through Window's Services GUI](#startingMySqlThroughServices)
+		* [How to Start MySQL with Powershell](#startingMySqlThroughPowershell)
+* This section is for running the Flask application with Docker Containers:
+	* [Notes on Docker Compose](#notesOnDockerCompose)
+		* [How to Start the Containers](#howToStartTheDockerContainers)
+		* [How to Stop the Docker Containers](#howToStopTheDockerContainers)
+* Troubleshooting Actions:
+	* [Issues and Their Fix Actions](#issuesAndFixActions)
+	* [Cryptography package is required](#cryptoGraphyPackageIsRequired)
 
-## How to start the Virtual Enviroment:
-	.\venv\Scripts\activate
+## Python Virtual Environment Notes <a name="pythonVirtualEnvironmentNotes"></a>
+### How to create a Python Virtual Environment <a name="creatingPythonVirtualEnvironment"></a>
+1. Run the following command from a powershell terminal:
 
-## How to generate requirements.txt
-* Do this when you want to save all the python dependencies you may have added while developing.
-* Make sure the virtual environment is started before generating requirements.txt
+		python -m venv <name_of_virtual_environment>
 
-    pip freeze > requirements.txt
+* Example:
 
-## How to install dependencies from requirements.txt:
-* This is run on the host/image to get the python packages installed.
-	
-	pip install -r /app/requirements.txt
+		python -m venv venv
 
-## How to start the flask app locally:
-* Note: The syntax is: ```flask --app <appname> --debug run```
 
-	flask --app app --debug run
+### How to Start a Python Virtual Environment <a name="startingPythonVirtualEnvironment"></a>
+1. Run the following command from a powershell terminal:
 
-## Starting MySQL Service on the Local Machine.
-### Option 1, Services GUI: <br>
-Click the start menu and start typing "Services". <br>
-Run "Services" as an administrator. <br>
-Find the "MySQL80" service and start it. <br>
+        .\<name_of_virtual_environment>\Scripts\activate
 
-### Option 2, Powershell:
-Start Powershell as an administrator and run the following command. <br>
-```
-	Start-Service -Name "MySQL80"
-```
-## Useful HTML
-### HTML for a button that submits a request to the backend:
-	<form action="/url_to_submit_to" method="post" id="this_buttons_id"><button type="submit">button_text</button></form>
+* Example:
 
-## Issues and their fixes.
-### Cryptography package is required:
-	I ran into this issue several times when starting the application for the first time after restarting my machine. 
-	How to fix:
-	1. Make sure that the mySql service is running.
-	2. Sign connect to the mySql server with the MySQL server workbench. 
-	I'm currently not sure why this fixes the issue but so far it has a 100% success rate of alleviating the problem.
+		.\venv\Scripts\activate
 
-## Docker Compose
-### Starting the containers:
-```
-	docker-compose.yml up --build
-```
-### Stopping the containers:
-```
-	docker-compose down -v
-```
+### How to Stop a Python Virtual Environment <a name="stoppingPythonVirtualEnvironment"></a>
+1. Run the following command from a powershell terminal:
 
-### SSH Command to access the Golf EC2
+        deactivate
 
-	ssh -i "Golf.pem" ubuntu@ec2-3-138-117-65.us-east-2.compute.amazonaws.com
+## Python Dependencies Notes <a name="pythonPackageDependenciesNotes"></a>
+### How to Install Dependencies From requirements.txt <a name="installingFromRequirementsTxt"></a>
+* **Note:** Make sure the python virtual environment is started before running this command.	
+
+		pip install -r .\<path_to_requirements.txt>\requirements.txt
+
+* Example:
+
+		pip install -r .\app\requirements.txt
+
+## How to Generate the requirements.txt File <a name="generatingRequirementsTxt"></a>
+* This saves all the python dependencies you have installed in your environment.
+* **Note:** Make sure the python virtual environment is started before running this command.
+
+		pip freeze > .\<path_to_requirements.txt>\requirements.txt
+
+* Example:
+
+		pip freeze > .\app\requirements.txt
+
+## How to Start the Flask Application Locally <a name="startingFlaskApp"></a>
+* **Note:** Make sure the python virtual environment is started before running this command.
+
+		flask --app .\<path_to_app>\<app_name> --debug run
+
+* Example:
+
+		flask --app .\app\app --debug run
+
+## Notes on MySQL <a name="notesOnMySqlOnHost"></a>
+### How to Start MySQL Through Window's Services GUI <a name="startingMySqlThroughServices"></a>
+1. Click the start menu and start typing "Services".
+2. Run "Services" as an administrator.
+3. Find the "MySQL80" service and start it.
+
+### How to Start MySQL with Powershell <a name="startingMySqlThroughPowershell"></a>
+1. Start Powershell as an administrator and run the following command:
+
+		Start-Service -Name "MySQL80"
+
+## Notes on Docker Compose <a name="notesOnDockerCompose"></a>
+### How to Start the Docker Containers <a name="howToStartTheDockerContainers"></a>
+
+		docker-compose.yml up --build
+
+### How to Stop the Docker Containers <a name="howToStopTheDockerContainers"></a>
+
+		docker-compose down -v
+
+## Issues and Their Fix Actions <a name="issuesAndFixActions"></a>
+### Cryptography package is required <a name="cryptoGraphyPackageIsRequired"></a>
+I ran into this issue several times when starting the application for the first time after restarting my machine.<br>
+Fix Actions:
+1. Make sure that the MySQL80 service is running.
+2. Sign connect to the MySQL server with the MySQL server workbench.<br>
+I'm currently not sure why this fixes the issue but so far it has a 100% success rate of alleviating the problem.

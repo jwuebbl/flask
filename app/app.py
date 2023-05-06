@@ -84,9 +84,10 @@ def submitLeagueGame():
          response = make_response('')
          return response
       if request.method == "GET":
-         return redirect('/LoLKDA')
+         return render_template('lolKda.html')
    else:
-      return redirect('/')
+      needToSignIn = True
+      return redirect(url_for('home', needToSignIn=needToSignIn))
 
 @app.route('/roulette')
 def roulette():

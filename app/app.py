@@ -62,49 +62,7 @@ def menu():
    else:
       needToSignIn = True
       return redirect(url_for('home', needToSignIn=needToSignIn))
-   
-@app.route('/logout')
-def logout():
-   session.pop('loggedin')
-   session.pop('id')
-   session.pop('username')
-   return redirect(url_for('home'))
 
-@app.route('/roulette')
-def roulette():
-   if 'loggedin' in session:
-      cursor.execute("SELECT * FROM accounts WHERE username = %s", session['username'])
-      connection.commit()
-      account = cursor.fetchone()
-      return render_template('roulette.html', account=account[1], num_of_chips=account[4], last_spin_number=winning_number, last_winning_color=winning_color.capitalize())
-   else:
-      return redirect('/')    
-   
-@app.route('/roulette_simulation', methods=['GET', 'POST'])
-def roulette_simulation():
-   if request.method == "GET":
-      if 'loggedin' in session:
-         return render_template('roulette_simulation.html')
-      else:
-         return redirect('/')    
-   else:
-      print('/roulette_simulation post method received.')
-
-@app.route('/makeRouletteBet', methods=['POST'])
-def makeRouletteBet():
-   if 'loggedin' in session:
-      bets =  request.get_json()['bets']
-      # roullete logic to see if i win
-      global winning_number, winning_color
-      winning_number, winning_color = games.roulette.check_bets(bets, cursor, connection, session)
-      if winning_number == 37:
-         winning_number = '0'
-      if winning_number == 38:
-         winning_number = '00'
-      return redirect('roulette')
-   else:
-      return redirect('/')
-   
 @app.route('/submitLeagueGame', methods=['OPTIONS', 'GET', 'POST'])
 def submitLeagueGame():
    if 'loggedin' in session:
@@ -130,7 +88,47 @@ def submitLeagueGame():
    else:
       return redirect('/')
 
+@app.route('/roulette')
+def roulette():
+   if 'loggedin' in session:
+      cursor.execute("SELECT * FROM accounts WHERE username = %s", session['username'])
+      connection.commit()
+      account = cursor.fetchone()
+      return render_template('roulette.html', account=account[1], num_of_chips=account[4], last_spin_number=winning_number, last_winning_color=winning_color.capitalize())
+   else:
+      return redirect('/')    
    
+@app.route('/roulette_simulation', methods=['GET', 'POST'])
+def roulette_simulation():
+   if request.method == "GET":
+      if 'loggedin' in session:
+         return render_template('roulette_simulation.html')
+      else:
+         return redirect('/')    
+   else:
+      print(request.method + " Received.")
+
+@app.route('/makeRouletteBet', methods=['POST'])
+def makeRouletteBet():
+   if 'loggedin' in session:
+      bets =  request.get_json()['bets']
+      # roullete logic to see if i win
+      global winning_number, winning_color
+      winning_number, winning_color = games.roulette.check_bets(bets, cursor, connection, session)
+      if winning_number == 37:
+         winning_number = '0'
+      if winning_number == 38:
+         winning_number = '00'
+      return redirect('roulette')
+   else:
+      return redirect('/')
+   
+@app.route('/logout')
+def logout():
+   session.pop('loggedin')
+   session.pop('id')
+   session.pop('username')
+   return redirect(url_for('home'))
 
 if __name__ == '__main__':
    app.run(debug=True, host='0.0.0.0')

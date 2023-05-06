@@ -10,8 +10,11 @@
 		<h1>Welcome!</h1>
 		{% if newaccount %}
 			<p id="newAccountMessage">Account "{{ newaccount }}" created! <br> You may now sign in with it.</p>
+		{% elif needToSignIn %}
+			<p id="newAccountMessage">Please sign in first, or enter a username to create an account.</p>
 		{% elif not newaccount %}
-			<p>Enter a username to create a new account.</p>
+			<p id="newAccountMessage">Enter a username to create a new account.</p>
+
 		{% endif %}
 		
 		<div id="loginDiv">

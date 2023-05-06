@@ -33,40 +33,42 @@ cursor = connection.cursor()
       
 @app.route('/', methods=('GET', 'POST'))
 def home():
-   if request.method == "GET": 
-      return render_template('signin.html')
-   if request.method == "POST":
-      username = request.form.get("uname")
-      cursor.execute("SELECT * FROM accounts WHERE username = %s", username)
-      connection.commit()
-      account = cursor.fetchone()
-      if account:
-         session['loggedin'] = True
-         session['id'] = account[0]
-         session['username'] = account[1]
-         return redirect(url_for('menu.html'))
-      else:
-         cursor.execute("INSERT INTO accounts (id, username, password, email, chips) VALUES (NULL, %s, NULL, NULL, %s)", (username, 100))
+   if 'loggedin' in session:
+      return redirect(url_for('menu'))
+   else:
+      if request.method == "GET":
+         needToSignIn = request.args.get('needToSignIn')
+         return render_template('signin.html', needToSignIn=needToSignIn)
+      if request.method == "POST":
+         username = request.form.get("uname")
+         cursor.execute("SELECT * FROM accounts WHERE username = %s", username)
          connection.commit()
-         newaccount = True
-         return render_template('signin.html')
-
-
-@app.route('/logout')
-def logout():
-    # Remove session data, this will log the user out
-   session.pop('loggedin', None)
-   session.pop('id', None)
-   session.pop('username', None)
-   # Redirect to login page
-   return redirect('/')
+         account = cursor.fetchone()
+         if account:
+            session['loggedin'] = True
+            session['id'] = account[0]
+            session['username'] = account[1]
+            return redirect(url_for('menu'))
+         else:
+            cursor.execute("INSERT INTO accounts (id, username, password, email, chips) VALUES (NULL, %s, NULL, NULL, %s)", (username, 100))
+            connection.commit()
+            newaccount = username
+            return render_template('signin.html', newaccount=newaccount)
 
 @app.route('/menu', methods=('GET', 'POST'))
 def menu():
    if 'loggedin' in session:
       return render_template('menu.html')
    else:
-      return redirect('/')
+      needToSignIn = True
+      return redirect(url_for('home', needToSignIn=needToSignIn))
+   
+@app.route('/logout')
+def logout():
+   session.pop('loggedin')
+   session.pop('id')
+   session.pop('username')
+   return redirect(url_for('home'))
 
 @app.route('/roulette')
 def roulette():

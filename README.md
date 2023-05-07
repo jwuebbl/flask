@@ -101,6 +101,28 @@
 
 		docker-compose down -v
 
+## Interacting with a Running MySQL Docker Container
+### How to connect to the MySQL Container
+
+		docker exec -it container_name_here mysql -u user_name_here -p
+
+### Useful Queries
+#### Show the databases:
+
+		show databases;
+
+#### Use a Database:
+
+		use database_name_here;
+
+#### To Show the Tables in a Database:
+
+		show tables;
+
+#### To Show all the Rows in a Table:
+
+		select * from table_name_here;
+
 ## How to Connect to the Production EC2 Instance <a name="connectingToTheProdEc2Instance"></a>
 Run the following command from the project's root directory:
 

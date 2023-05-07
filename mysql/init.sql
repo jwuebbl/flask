@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS `leagueGames` (
     kills int NOT NULL,
     deaths int NOT NULL,
     assists int NOT NULL,
+    time_stamp DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (gameNum),
     FOREIGN KEY (accountId) REFERENCES accounts(id)
 );

@@ -15,6 +15,7 @@
 * This section is for running the Flask application with Docker Containers:
 	* [Notes on Docker Compose](#notesOnDockerCompose)
 		* [How to Start the Containers](#howToStartTheDockerContainers)
+		* [How to replace the running app container with the updated version](#replaceRunningAppContainer)
 		* [How to Stop the Docker Containers](#howToStopTheDockerContainers)
 * How to interact with the Production Server: *Note:* Use the same docker-compose commands as used in dev.
 	* [How to Connect to the Production EC2 Instance](#connectingToTheProdEc2Instance)
@@ -91,6 +92,10 @@
 ### How to Start the Docker Containers <a name="howToStartTheDockerContainers"></a>
 
 		docker-compose.yml up --build
+
+### How to replace the running app container with the updated version <a name="replaceRunningAppContainer"></a>
+
+		docker-compose up --build --no-deps app
 
 ### How to Stop the Docker Containers <a name="howToStopTheDockerContainers"></a>
 

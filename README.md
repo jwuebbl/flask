@@ -23,8 +23,8 @@
 	* [Useful Queries](#usefulQueries)
 		* [Show the databases](#showTheDatabasesQuery)
 		* [Use a Database](#useADatabaseQuery)
-		* [To Show the Tables in a Database](#showTablesQueries)
-		* [To Show all the Rows in a Table](#showAllRowsInATableQuery)
+		* [Show the Tables in a Database](#showTablesQueries)
+		* [Show all the Rows in a Table](#showAllRowsInATableQuery)
 
 * How to interact with the Production Server: *Note:* Use the same docker-compose commands as used in dev.
 	* [How to Connect to the Production EC2 Instance](#connectingToTheProdEc2Instance)
@@ -124,11 +124,11 @@
 
 		use database_name_here;
 
-#### To Show the Tables in a Database <a name="showTablesQueries"></a>
+#### Show the Tables in a Database <a name="showTablesQueries"></a>
 
 		show tables;
 
-#### To Show all the Rows in a Table <a name="showAllRowsInATableQuery"></a>
+#### Show all the Rows in a Table <a name="showAllRowsInATableQuery"></a>
 
 		select * from table_name_here;
 

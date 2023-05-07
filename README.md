@@ -16,6 +16,8 @@
 	* [Notes on Docker Compose](#notesOnDockerCompose)
 		* [How to Start the Containers](#howToStartTheDockerContainers)
 		* [How to Stop the Docker Containers](#howToStopTheDockerContainers)
+* How to interact with the Production Server: *Note:* Use the same docker-compose commands as used in dev.
+	* [How to Connect to the Production EC2 Instance](#connectingToTheProdEc2Instance)
 * Troubleshooting Actions:
 	* [Issues and Their Fix Actions](#issuesAndFixActions)
 	* [Cryptography package is required](#cryptoGraphyPackageIsRequired)
@@ -93,6 +95,11 @@
 ### How to Stop the Docker Containers <a name="howToStopTheDockerContainers"></a>
 
 		docker-compose down -v
+
+## How to Connect to the Production EC2 Instance <a name="connectingToTheProdEc2Instance"></a>
+Run the following command from the project's root directory:
+
+		ssh -i "prod.pem" ubuntu@ec2-3-13-98-236.us-east-2.compute.amazonaws.com
 
 ## Issues and Their Fix Actions <a name="issuesAndFixActions"></a>
 ### Cryptography package is required <a name="cryptoGraphyPackageIsRequired"></a>

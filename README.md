@@ -17,6 +17,15 @@
 		* [How to Start the Containers](#howToStartTheDockerContainers)
 		* [How to replace the running app container with the updated version](#replaceRunningAppContainer)
 		* [How to Stop the Docker Containers](#howToStopTheDockerContainers)
+	* [Interacting with a Running MySQL Docker Container](#interactingWithMySqlContainer)
+		* [How to connect to the MySQL Container](#howToConnectToMySqlContainer)
+* This section is storage for useful SQL queries:
+	* [Useful Queries](#usefulQueries)
+		* [Show the databases](#showTheDatabasesQuery)
+		* [Use a Database](#useADatabaseQuery)
+		* [To Show the Tables in a Database](#showTablesQueries)
+		* [To Show all the Rows in a Table](#showAllRowsInATableQuery)
+
 * How to interact with the Production Server: *Note:* Use the same docker-compose commands as used in dev.
 	* [How to Connect to the Production EC2 Instance](#connectingToTheProdEc2Instance)
 * Troubleshooting Actions:
@@ -101,25 +110,25 @@
 
 		docker-compose down -v
 
-## Interacting with a Running MySQL Docker Container
-### How to connect to the MySQL Container
+## Interacting with a Running MySQL Docker Container <a name="interactingWithMySqlContainer"></a>
+### How to connect to the MySQL Container <a name="howToConnectToMySqlContainer"></a>
 
 		docker exec -it container_name_here mysql -u user_name_here -p
 
-### Useful Queries
-#### Show the databases:
+## Useful SQL Queries <a name="usefulQueries"></a>
+#### Show the databases <a name="showTheDatabasesQuery"></a>
 
 		show databases;
 
-#### Use a Database:
+#### Use a Database <a name="useADatabaseQuery"></a>
 
 		use database_name_here;
 
-#### To Show the Tables in a Database:
+#### To Show the Tables in a Database <a name="showTablesQueries"></a>
 
 		show tables;
 
-#### To Show all the Rows in a Table:
+#### To Show all the Rows in a Table <a name="showAllRowsInATableQuery"></a>
 
 		select * from table_name_here;
 

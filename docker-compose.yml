@@ -30,6 +30,9 @@ services:
       - app
     networks:
       - main-network
+volumes:
+  mysql-data:
+    driver: local
 networks:
   main-network:
     driver: bridge

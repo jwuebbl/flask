@@ -113,7 +113,7 @@
 ## Interacting with a Running MySQL Docker Container <a name="interactingWithMySqlContainer"></a>
 ### How to connect to the MySQL Container <a name="howToConnectToMySqlContainer"></a>
 
-		docker exec -it container_name_here mysql -u user_name_here -p
+		docker exec -it container_name_here mysql mysql -u user_name_here -p
 
 ## Useful SQL Queries <a name="usefulQueries"></a>
 #### Show the databases <a name="showTheDatabasesQuery"></a>

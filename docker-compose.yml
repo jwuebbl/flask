@@ -17,6 +17,7 @@ services:
       MYSQL_ROOT_PASSWORD: poop
     volumes:
       - ./mysql:/docker-entrypoint-initdb.d/:ro
+      - ./mysql:/var/lib/mysql
     networks:
       - main-network
   nginx:

@@ -1,10 +1,7 @@
 /* Author: Jeffrey Wuebbles */
 
-body {
-    background-color: gray;
-  }
+body{background-color:#000;color:#ff0}
   h1 {
-    color: red;
     text-align: center;
   }
   #loginDiv {
@@ -28,12 +25,12 @@ body {
   }
   
   footer {
-      color: red;
+      color: #ff0;
       position: bottom;
       text-align: center;
       border-style: outset;
       border-width: 10px;
-      border-color: blue;
+      border-color: #ff0;
       width: 500px;
       margin: auto;
       margin-top: 50px;

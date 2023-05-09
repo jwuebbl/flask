@@ -84,7 +84,7 @@ def submitLeagueGame():
          response = make_response('')
          return response
       if request.method == "GET":
-         return render_template('lolKda.html')
+         return render_template('lolKda.html', username="test")
    else:
       needToSignIn = True
       return redirect(url_for('home', needToSignIn=needToSignIn))
@@ -123,6 +123,15 @@ def makeRouletteBet():
       return redirect('roulette')
    else:
       return redirect('/')
+   
+@app.route('/username')
+def username():
+   if 'loggedin' in session:
+      username = session['username']
+      response = {'username': username}
+      return jsonify(response)
+   else:
+      return 400
    
 @app.route('/logout')
 def logout():

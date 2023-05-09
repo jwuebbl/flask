@@ -25,14 +25,15 @@ CREATE TABLE IF NOT EXISTS `leagueGames` (
     kills int NOT NULL,
     deaths int NOT NULL,
     assists int NOT NULL,
+    winLoss varchar(1) NOT NULL,
     time_stamp DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (gameNum),
     FOREIGN KEY (accountId) REFERENCES accounts(id)
 );
 
 DELIMITER //
-CREATE PROCEDURE `addLeageGame`(IN arg_accountId INT, IN arg_leagueChar varchar(50), IN arg_kills INT, IN arg_deaths INT, IN arg_assists INT)
+CREATE PROCEDURE `addLeageGame`(IN arg_accountId INT, IN arg_leagueChar varchar(50), IN arg_kills INT, IN arg_deaths INT, IN arg_assists INT, IN arg_winLoss varchar(1))
 BEGIN
-	INSERT INTO leagueGames (gameNum, accountId, leagueChar, kills, deaths, assists) VALUES (null, arg_accountId, arg_leagueChar, arg_kills, arg_deaths, arg_assists);
+	INSERT INTO leagueGames (gameNum, accountId, leagueChar, kills, deaths, assists, winLoss) VALUES (null, arg_accountId, arg_leagueChar, arg_kills, arg_deaths, arg_assists, arg_winLoss);
 END //
 DELIMITER ;

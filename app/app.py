@@ -79,7 +79,8 @@ def submitLeagueGame():
          kills = request.json['kills']
          deaths = request.json['deaths']
          assists = request.json['assists']
-         cursor.callproc('addLeageGame', [int(session['id']), str(char), int(kills), int(deaths), int(assists)])
+         winLoss = request.json['winLoss']
+         cursor.callproc('addLeageGame', [int(session['id']), str(char), int(kills), int(deaths), int(assists), str(winLoss)])
          connection.commit()
          response = make_response('')
          return response

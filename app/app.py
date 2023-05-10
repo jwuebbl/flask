@@ -67,14 +67,12 @@ def menu():
 def submitLeagueGame():
    if 'loggedin' in session:
       if request.method == "OPTIONS":
-         print('options')
          response = make_response()
          response.headers.add("Access-Control-Allow-Origin", "*")
          response.headers.add("Access-Control-Allow-Headers", "*")
          response.headers.add("Access-Control-Allow-Methods", "*")
          return response
       if request.method == "POST":
-         print('post')
          char = request.json['char']
          kills = request.json['kills']
          deaths = request.json['deaths']
@@ -85,10 +83,11 @@ def submitLeagueGame():
          response = make_response('')
          return response
       if request.method == "GET":
-         return render_template('lolKda.html', username="test")
+         return render_template('lolKda.html')
    else:
       needToSignIn = True
       return redirect(url_for('home', needToSignIn=needToSignIn))
+
 
 @app.route('/roulette')
 def roulette():
@@ -133,6 +132,20 @@ def username():
       return jsonify(response)
    else:
       return 400
+
+@app.route('/leagueScoreBoard')
+def leagueScoreBoard():
+   query = "SELECT * FROM leagueGames WHERE accountId = " + str(session['id']) + " ORDER BY gameNum DESC LIMIT 5;"
+   print(query)
+   cursor.execute(query)
+   connection.commit()
+   response = cursor.fetchall()
+   # one record schema: gameNum, accountId, char, kills, deaths, assists, win/loss, datetime
+   # one record example: (5, 4, 'Akali', 0, 0, 0, 'L', datetime.datetime(2023, 5, 9, 20, 21, 43))
+   results = []
+   for game in response:
+      results.append(game)
+   return results
    
 @app.route('/logout')
 def logout():

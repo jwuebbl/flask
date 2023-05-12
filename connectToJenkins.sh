@@ -1,0 +1,1 @@
+ssh -i "jenkins.pem" ec2-user@ec2-3-21-129-236.us-east-2.compute.amazonaws.com

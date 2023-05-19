@@ -3,3 +3,6 @@ __pycache__/
 jenkins.pem
 prod.pem
 jenkins.pem
+jenkinsCliToken
+jenkins-cli.jar
+jenkinsCliHelp.sh

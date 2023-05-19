@@ -1,6 +1,6 @@
 # Run these commands from a fresh RHEL Ec2 Instance.
     # Installing jenkins
-sudo yum check-update
+sudo yum update
 sudo yum install wget
 sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
 sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
@@ -19,3 +19,9 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword # Gets the initial setup 
     # URL:  http://3.21.129.236:8080/
 
     # At this point in time I'm using the built in node.
+
+# Need to install Git to use it.
+sudo yum install git
+
+# Install nodejs and npm to build angular apps on server
+sudo yum install nodejs npm

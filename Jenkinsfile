@@ -8,7 +8,13 @@ pipeline {
                 copyArtifacts(projectName: 'lolKda', filter: 'dist/lol-kda/*.js', selector: lastSuccessful(), target: 'app/static/js/')
                 copyArtifacts(projectName: 'lolKda', filter: 'dist/lol-kda/*.css', selector: lastSuccessful(), target: 'app/static/styles/')
 
-                sh 'docker build -t jwuebblz/flask:latest ./app'
+                // sh 'docker build -t jwuebblz/flask:latest ./app'
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerHubCreds') {
+                        def image = docker.build('jwuebblz/flask:latest')
+                        image.push()
+                    }
+                }
             }
         }
     }

@@ -3,24 +3,15 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'I have to build the image'
-            }
-            
-            post {
-                success {
-                    echo 'Success'
-                    // archiveArtifacts artifacts: 'dist/**'
-                }
-                failure {
-                    echo 'A error occured during the build.'
-                }
+                echo 'Pulling the latest archived successful lolKda build files.'
+                copyArtifacts(projectName: 'lolKda', filter: 'lolKda.html', selector: lastSuccessful(), target: 'app/templates/')
+                copyArtifacts(projectName: 'lolKda', filter: 'lolKdaRunTime.js', selector: lastSuccessful(), target: 'app/static/js/')
+                copyArtifacts(projectName: 'lolKda', filter: 'lolKdaPolyfills.js', selector: lastSuccessful(), target: 'app/static/js/')
+                copyArtifacts(projectName: 'lolKda', filter: 'lolKdaMain.js', selector: lastSuccessful(), target: 'app/static/js/')
+                copyArtifacts(projectName: 'lolKda', filter: 'lolKdaStyles.js', selector: lastSuccessful(), target: 'app/static/styles/')
+
+                sh 'docker build -t jwuebblz/flask:latest .'
             }
         }
-        
-        // stage('Deploy') {
-        //     steps {
-        //         echo 'call the flask build pipeline here. Flask will pull the latest artifact everytime?'
-        //     }
-        // }
     }
 }

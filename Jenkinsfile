@@ -10,8 +10,9 @@ pipeline {
 
                 // sh 'docker build -t jwuebblz/flask:latest ./app'
                 script {
+                    sh 'cd ./app'
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerHubCreds') {
-                        def image = docker.build('jwuebblz/flask:latest')
+                        def image = docker.build('jwuebblz/flask:latest', './app')
                         image.push()
                     }
                 }

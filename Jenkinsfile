@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerHubCreds') {
-                        def image = docker.build('jwuebblz/flask:latest')
+                        def image = docker.build('jwuebblz/flask:latest', './app')
                         image.push()
                     }
                 }

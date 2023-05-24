@@ -1,18 +1,11 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Build the flask docker image') {
             steps {
-                echo 'Pulling the latest archived successful lolKda build files.'
-                copyArtifacts(projectName: 'lolKda', filter: 'dist/lol-kda/lolKda.html', selector: lastSuccessful(), target: 'app/templates/')
-                copyArtifacts(projectName: 'lolKda', filter: 'dist/lol-kda/*.js', selector: lastSuccessful(), target: 'app/static/js/')
-                copyArtifacts(projectName: 'lolKda', filter: 'dist/lol-kda/*.css', selector: lastSuccessful(), target: 'app/static/styles/')
-
-                // sh 'docker build -t jwuebblz/flask:latest ./app'
                 script {
-                    sh 'cd ./app'
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerHubCreds') {
-                        def image = docker.build('jwuebblz/flask:latest', './app')
+                        def image = docker.build('jwuebblz/flask:latest')
                         image.push()
                     }
                 }

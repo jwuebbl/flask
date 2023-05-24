@@ -1,1 +1,0 @@
-ssh -i "prod.pem" ubuntu@ec2-3-13-98-236.us-east-2.compute.amazonaws.com

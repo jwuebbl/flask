@@ -3,7 +3,8 @@
 <head>
 	<title>Jeff's Flask Site</title>
 	<link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='images/dscim.ico') }}">
-	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/menu.css') }}">
+	<link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/menu.css') }}">
+    <script src="{{ url_for('static', filename='js/menu.js') }}"></script>
 </head>
 
 <body>
@@ -11,23 +12,21 @@
 
 	<p>You are logged in as: {{ session['username'] }}</p>
     
-	<p align="left">
-        <a href=roulette>
-            <button class=grey style="height:75px;width:150px">Roulette</button>
-        </a>
-    </p>
+	<div align="left">
+        <button id='rouletteButton' class=grey style="height:75px;width:150px">Roulette</button>
+    </div>
 
-	<p align="left">
-        <a href=submitLeagueGame>
-            <button class=grey style="height:75px;width:150px">Submit a Leage Of Legends Game KDA.</button>
-        </a>
-    </p>
+	<div align="left">
+        <button id='leagueButton' class=grey style="height:75px;width:150px">Submit a Leage Of Legends Game KDA.</button>
+    </div>
 
-	<p align="left">
-        <a href=logout>
-            <button class=grey style="height:75px;width:150px">logout</button>
-        </a>
-    </p>
+	<div align="left">
+        <button id='logoutButton' class=grey style="height:75px;width:150px">logout</button>
+    </div>
+
+    <div>
+        <img id="ciggyGif" src="{{ url_for('static', filename='gifs/ciggy.gif') }}" alt="ciggy GIF" style="display: none;">
+    </div>
 
 	<footer>
 		<p>Author: Jeffrey Wuebbles</p>

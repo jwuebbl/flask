@@ -6,13 +6,6 @@
 	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/roulette.css') }}">
 	<script>
 		num_of_bets = 0;
-		var base_url = window.location.origin;
-		var host = window.location.host;
-
-		console.log(base_url)
-		console.log(host)
-
-
 
 		function spinWheel() {
 			// Get all the bets
@@ -34,7 +27,7 @@
 			xhr.onload = function(res) { // Refreshes the page after a successful post request. I don't know why this works but it does. 
 				if (xhr.readyState === 4) {
 					if (xhr.status === 200) {
-					window.location.replace("http://127.0.0.1:5000/roulette");
+						window.location.href = '/roulette';
 					}
 				}
 			};	

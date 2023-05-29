@@ -24,8 +24,9 @@
         <button id='logoutButton' class=grey style="height:75px;width:150px">logout</button>
     </div>
 
-    <div>
-        <img id="ciggyGif" src="{{ url_for('static', filename='gifs/ciggy.gif') }}" alt="ciggy GIF" style="display: none;">
+    <div id="ciggyGif" style="display: none;">
+		<p>Loading webpage!</p>
+        <img src="{{ url_for('static', filename='gifs/ciggy.gif') }}" alt="ciggy GIF">
     </div>
 
 	<footer>

@@ -2,7 +2,7 @@ function displayGifAndGoToPage(pageName) {
     ciggyGif.style.display = 'block';
     setTimeout(function() {
         window.location.href = pageName;
-    }, 1200);
+    }, 1000);
 }
 
 document.addEventListener('DOMContentLoaded', function() {

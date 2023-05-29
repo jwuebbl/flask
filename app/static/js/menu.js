@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var ciggyGif = document.getElementById('ciggyGif');
 
     // Actions when buttons are clicked
-    rouletteButton.addEventListener('click', displayGifAndGoToPage('/roulette'));
-    leagueButton.addEventListener('click', displayGifAndGoToPage('/submitLeagueGame'));
-    logoutButton.addEventListener('click', displayGifAndGoToPage('/logout'));
+    rouletteButton.addEventListener('click', (evt) => displayGifAndGoToPage('/roulette'));
+    leagueButton.addEventListener('click', (evt) => displayGifAndGoToPage('/submitLeagueGame'));
+    logoutButton.addEventListener('click', (evt) => displayGifAndGoToPage('/logout'));
 });

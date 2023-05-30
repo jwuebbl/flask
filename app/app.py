@@ -59,6 +59,12 @@ cursor = connection.cursor()
 @app.route('/login', methods=['POST', 'OPTIONS'])
 def login():
    if request.method == "OPTIONS":
+         print('hi')
+         print('hi')
+         print('hi')
+         print('hi')
+         print('hi')
+         print('hi')
          response = make_response()
          response.headers.add("Access-Control-Allow-Origin", "*")
          response.headers.add("Access-Control-Allow-Headers", "*")

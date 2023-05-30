@@ -56,16 +56,25 @@ cursor = connection.cursor()
 #             return render_template('signin.html', newaccount=newaccount)
 
 # The user gets the login page from the front-end app. 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['POST', 'OPTIONS'])
 def login():
-    data = request.get_json()
-    username = data['username']
-    password = data['password']
-    user = next((user for user in users if user['username'] == username), None)
-    if user and check_password_hash(user['password'], password):
-        token = jwt.encode({'user_id': user['id'], 'exp': datetime.utcnow() + timedelta(seconds=app.config['TOKEN_EXPIRATION_SECONDS'])}, app.config['SECRET_KEY'])
-        return jsonify({'token': token.decode('UTF-8')})
-    return jsonify({'message': 'Invalid credentials'}), 401
+   if request.method == "OPTIONS":
+         response = make_response()
+         response.headers.add("Access-Control-Allow-Origin", "*")
+         response.headers.add("Access-Control-Allow-Headers", "*")
+         response.headers.add("Access-Control-Allow-Methods", "*")
+         return response
+   else:
+      data = request.get_json()
+      username = data['username']
+      password = data['password']
+      print(data)
+      return jsonify({'message': 'poop'}), 200
+      # user = next((user for user in users if user['username'] == username), None)
+      # if user and check_password_hash(user['password'], password):
+      #    token = jwt.encode({'user_id': user['id'], 'exp': datetime.utcnow() + timedelta(seconds=app.config['TOKEN_EXPIRATION_SECONDS'])}, app.config['SECRET_KEY'])
+      #    return jsonify({'token': token.decode('UTF-8')})
+      # return jsonify({'message': 'Invalid credentials'}), 401
 
 @app.route('/menu', methods=('GET', 'POST'))
 def menu():

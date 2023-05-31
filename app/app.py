@@ -15,7 +15,7 @@ app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = "poop"
 app.config['MYSQL_DATABASE_DB'] = 'myapp'
 if sys.platform == 'linux':
-   app.config['MYSQL_DATABASE_HOST'] = 'db'
+   app.config['MYSQL_DATABASE_HOST'] = 'mysql_db'
 elif sys.platform == 'win32':
    app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 else:

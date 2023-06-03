@@ -27,60 +27,32 @@ import games.roulette
 
 winning_number = 38
 winning_color = 'green'
-
 connection = mysql.connect()
 cursor = connection.cursor()
       
-# @app.route('/', methods=('GET', 'POST'))
-# def home():
-#    if 'loggedin' in session:
-#       return redirect(url_for('menu'))
-#    else:
-#       if request.method == "GET":
-#          needToSignIn = request.args.get('needToSignIn')
-#          return render_template('signin.html', needToSignIn=needToSignIn)
-#       if request.method == "POST":
-#          username = request.form.get("uname")
-#          cursor.execute("SELECT * FROM accounts WHERE username = %s", username)
-#          connection.commit()
-#          account = cursor.fetchone()
-#          if account:
-#             session['loggedin'] = True
-#             session['id'] = account[0]
-#             session['username'] = account[1]
-#             return redirect(url_for('menu'))
-#          else:
-#             cursor.execute("INSERT INTO accounts (id, username, password, email, chips) VALUES (NULL, %s, NULL, NULL, %s)", (username, 100))
-#             connection.commit()
-#             newaccount = username
-#             return render_template('signin.html', newaccount=newaccount)
-
-# The user gets the login page from the front-end app. 
-@app.route('/login', methods=['POST', 'OPTIONS'])
-def login():
-   if request.method == "OPTIONS":
-         print('hi')
-         print('hi')
-         print('hi')
-         print('hi')
-         print('hi')
-         print('hi')
-         response = make_response()
-         response.headers.add("Access-Control-Allow-Origin", "*")
-         response.headers.add("Access-Control-Allow-Headers", "*")
-         response.headers.add("Access-Control-Allow-Methods", "*")
-         return response
+@app.route('/', methods=('GET', 'POST'))
+def home():
+   if 'loggedin' in session:
+      return redirect(url_for('menu'))
    else:
-      data = request.get_json()
-      username = data['username']
-      password = data['password']
-      print(data)
-      return jsonify({'message': 'poop'}), 200
-      # user = next((user for user in users if user['username'] == username), None)
-      # if user and check_password_hash(user['password'], password):
-      #    token = jwt.encode({'user_id': user['id'], 'exp': datetime.utcnow() + timedelta(seconds=app.config['TOKEN_EXPIRATION_SECONDS'])}, app.config['SECRET_KEY'])
-      #    return jsonify({'token': token.decode('UTF-8')})
-      # return jsonify({'message': 'Invalid credentials'}), 401
+      if request.method == "GET":
+         needToSignIn = request.args.get('needToSignIn')
+         return render_template('signin.html', needToSignIn=needToSignIn)
+      if request.method == "POST":
+         username = request.form.get("uname")
+         cursor.execute("SELECT * FROM accounts WHERE username = %s", username)
+         connection.commit()
+         account = cursor.fetchone()
+         if account:
+            session['loggedin'] = True
+            session['id'] = account[0]
+            session['username'] = account[1]
+            return redirect(url_for('menu'))
+         else:
+            cursor.execute("INSERT INTO accounts (id, username, password, email, chips) VALUES (NULL, %s, NULL, NULL, %s)", (username, 100))
+            connection.commit()
+            newaccount = username
+            return render_template('signin.html', newaccount=newaccount)
 
 @app.route('/menu', methods=('GET', 'POST'))
 def menu():

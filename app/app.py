@@ -33,7 +33,7 @@ cursor = connection.cursor()
 @app.route('/', methods=('GET', 'POST'))
 def home():
    if 'loggedin' in session:
-      return redirect(url_for('menu'))
+      return redirect(url_for(' '))
    else:
       if request.method == "GET":
          needToSignIn = request.args.get('needToSignIn')

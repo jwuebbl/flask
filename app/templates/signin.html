@@ -24,5 +24,18 @@
 				<input type="submit" value="Sign in">
 			</form>
 		</div>
+
+		<div id="registerDiv">
+			<!-- Turning autocomplete on allows the browser to complete values the user has used before. -->
+				<form action="/registerNewAccount" method="post" autocomplete="on">
+					<label for="registerUsername">Username:</label>
+					<input type="text" id="registerUsername" name="registerUsername" placeholder="User Name" required>
+					<label for="registerPassword">Password:</label>
+					<input type="text" id="registerPassword" name="registerPassword" required>
+					<label for="email">(Optional) Enter your email:</label>
+					<input type="email" id="email" pattern=".+@globex\.com" size="20">
+					<input type="submit" value="Register User">
+				</form>
+		</div>
 	</body>
 </html>
